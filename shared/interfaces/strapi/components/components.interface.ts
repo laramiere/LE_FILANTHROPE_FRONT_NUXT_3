@@ -13,8 +13,11 @@ export interface BaseComponent {
 }
 
 export interface Picture {
-    alternativeText: string;
-    url: string;
-    id: number;
-    documentId: string;
+    id: string;
+    file: {
+        alternativeText: string;
+        url: string;
+        id: number;
+        documentId: string;
+    }
 }

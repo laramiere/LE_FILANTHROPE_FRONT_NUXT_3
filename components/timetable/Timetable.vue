@@ -33,8 +33,8 @@
     <div class="timetable__side">
         <img
             class="timetable__media"
-            :src="activeItem?.picture ? activeItem.picture.url : '/pictures/picture_8.jpg'"
-            :alt=" activeItem?.picture ? activeItem.picture.alternativeText : 'Manger'"
+            :src="activeItem?.picture ? `http://localhost:1337${activeItem.picture.file.url}` : '/pictures/picture_8.jpg'"
+            :alt=" activeItem?.picture ? activeItem.picture.file.alternativeText : 'Manger'"
             loading="lazy"
         >
     </div>
@@ -43,10 +43,10 @@
 
 <script lang="ts" setup>
 import type { TimetableComponent, TimetableItem } from '@/shared/interfaces'
-
+type KeyType = 0 | 1 | 2 | 3 | 4 | 5 | 6
 const props = defineProps<TimetableComponent>()
-const dayIndex = new Date().getDay()
-const mapperDay = {
+const dayIndex: KeyType = new Date().getDay() as KeyType
+const mapperDay: { [key in KeyType]: number } = {
     0: 6,
     1: 0,
     2: 1,
@@ -56,7 +56,8 @@ const mapperDay = {
     6: 5
 }
 const goodIndex = mapperDay[dayIndex]
-const activeItem : TimetableItem = props.horaire_restaurant?.timetableItem[goodIndex]
+const tiemTableItem : TimetableItem | undefined = props.horaire_restaurant?.timetableItem[goodIndex]
+const activeItem : null | TimetableItem = tiemTableItem ?? null
 console.log('activeItem : ', activeItem)
 </script>
 <style lang="scss" scoped>
@@ -101,6 +102,7 @@ console.log('activeItem : ', activeItem)
         }
         span {
             display: block;
+            text-transform: uppercase;
             line-height: 1;
         }
     }
