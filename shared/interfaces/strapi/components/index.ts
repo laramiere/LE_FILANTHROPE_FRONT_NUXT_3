@@ -1,0 +1,5 @@
+export * from './timetable/Timetable.interface'
+export * from './components.interface'
+export * from './board/Board.interface'
+export * from './hero/Hero.interface'
+export * from './componentKeys'

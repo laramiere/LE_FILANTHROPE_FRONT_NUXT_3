@@ -1,0 +1,9 @@
+$global-radius: 3rem;
+
+/**
+TRANSITION
+**/
+$default-transition-duration: .4s;
+$default-transition-style: cubic-bezier(1, 0.01, 0.58, 1);
+
+$transition: all $default-transition-duration $default-transition-style;

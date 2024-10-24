@@ -1,0 +1,113 @@
+<template>
+    <section class="board">
+        <h2 class="board__title fs-3">
+            {{ props.carte_du_restaurant.title }}
+        </h2>
+        <p
+            v-if="props.carte_du_restaurant.subtitle"
+            class="board__subtitle"
+        >
+            {{ props.carte_du_restaurant.subtitle }}
+        </p>
+        <div class="board__top">
+            <BoardFilter
+                :filters="mainCategory"
+                @click="changeMainCategory"
+            />
+            <BoardFilter
+                :filters="subCategory"
+                :mainFilter="false"
+                @click="changeSubCategory"
+            />
+        </div>
+        <div class="board__main">
+            <BoardSection
+                v-if="boardStats.sectionActive"
+                :section="boardStats.sectionActive"
+            />
+        </div>
+    </section>
+</template>
+<script lang="ts" setup>
+import type {
+    Board,
+    SectionLvl1,
+    SectionLvl2
+} from '@/shared/interfaces'
+import type { Ref } from 'vue'
+
+import { computed } from 'vue'
+
+const props = defineProps<Board>()
+
+const changeMainCategory = (name : string) => {
+    const newActiveCategory = props.carte_du_restaurant.sectionLvl1.find(item => item.title === name)
+    if (newActiveCategory) {
+        boardStats.mainActiveCategory = name
+        boardStats.subActiveCategory = newActiveCategory.sectionLvl2[0].title
+        boardStats.sectionActive = newActiveCategory.sectionLvl2[0]
+        activeCategory.value = newActiveCategory
+    }
+}
+
+const changeSubCategory = (name: string) => {
+    boardStats.subActiveCategory = name
+    findSectionToDisplay()
+}
+
+const findSectionToDisplay = () => {
+    const mainCategory = props.carte_du_restaurant.sectionLvl1.find(item => item.title === boardStats.mainActiveCategory)
+    if (mainCategory) {
+        const subCategory = mainCategory.sectionLvl2.find(item => item.title === boardStats.subActiveCategory)
+        if (subCategory) {
+            boardStats.sectionActive = subCategory
+        }
+    }
+}
+
+const mainCategory = props.carte_du_restaurant.sectionLvl1.reduce<string[]>((acc, currentItem) => {
+    acc.push(currentItem.title)
+    return acc
+},[])
+
+const subCategory = computed(() => {
+    return activeCategory.value.sectionLvl2.reduce<string[]>((acc, currentItem) => {
+        acc.push(currentItem.title)
+        return acc
+    }, [])
+})
+
+const activeCategory: Ref<SectionLvl1> = ref(props.carte_du_restaurant.sectionLvl1[0])
+
+const boardStats = reactive<{
+    mainActiveCategory: string | null,
+    subActiveCategory: string | null,
+    sectionActive: null | SectionLvl2
+}>({
+    mainActiveCategory: null,
+    subActiveCategory: null,
+    sectionActive: props.carte_du_restaurant.sectionLvl1[0].sectionLvl2[0]
+})
+
+
+</script>
+<style lang="scss" scoped>
+.board {
+    margin-bottom: 11rem;
+
+    &__title {
+        line-height: 1;
+        margin-bottom: 5rem;
+    }
+    &__subtitle {
+        margin-bottom: 5rem;
+    }
+    &__top {
+        .board-filter {
+            &:not(:last-child) {
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+</style>

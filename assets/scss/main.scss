@@ -1,0 +1,14 @@
+@import './settings//settings.index';
+@import './reset';
+@import './tools/tools.index';
+
+html {
+    background-color: $white;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 180rem;
+    margin: 0 auto;
+    padding: 0 5rem;
+}
