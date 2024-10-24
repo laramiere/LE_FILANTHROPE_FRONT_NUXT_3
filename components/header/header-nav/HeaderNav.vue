@@ -28,6 +28,7 @@ const emit = defineEmits(['clickOnOpenMenuBtn'])
     justify-content: space-between;
     padding: 5rem!important;
     transform: translateX(-50%);
+    transition: $transition;
 
     > div {
         .c-btn {

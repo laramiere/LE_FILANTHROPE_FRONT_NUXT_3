@@ -1,5 +1,8 @@
 <template>
-    <header class="header">
+    <header
+        class="header"
+        :class="{'hidden': scrollStatus.isUserScrollDown}"
+    >
         <HeaderNav
             @clickOnOpenMenuBtn="displayGeneralMenu = true"
         />
@@ -11,9 +14,15 @@
     </header>
 </template>
 <script setup lang="ts">
-import type { HeaderMenuItem } from '@/shared/interfaces/index'
+import { useScroll } from '@/shared/composable/scroll'
 import type { Ref } from 'vue'
-
+interface HeaderMenuItem {
+        label: string;
+        img: string;
+        alt: string;
+        link: string;
+}
+const { scrollStatus } = useScroll()
 const displayGeneralMenu: Ref<boolean> = ref(false)
 const headerItems: HeaderMenuItem[] = [
     {
@@ -51,6 +60,11 @@ const headerItems: HeaderMenuItem[] = [
 <style lang="scss" scoped>
 .header {
     position: relative;
-   z-index: 1;
+    z-index: 1;
+    &.hidden {
+        .header-nav {
+            top: -100%;
+        }
+    }
 }
 </style>

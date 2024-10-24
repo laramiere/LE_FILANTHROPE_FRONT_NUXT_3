@@ -58,7 +58,6 @@ const mapperDay: { [key in KeyType]: number } = {
 const goodIndex = mapperDay[dayIndex]
 const tiemTableItem : TimetableItem | undefined = props.horaire_restaurant?.timetableItem[goodIndex]
 const activeItem : null | TimetableItem = tiemTableItem ?? null
-console.log('activeItem : ', activeItem)
 </script>
 <style lang="scss" scoped>
 .timetable {
