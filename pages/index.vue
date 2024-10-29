@@ -99,7 +99,7 @@ const { data, error } = await useAsyncData('home', async () => {
                   }
                 }
               },
-              picture: {
+              pictures: {
                 populate: {
                   file: {
                       fields: ['url', 'alternativeText']
