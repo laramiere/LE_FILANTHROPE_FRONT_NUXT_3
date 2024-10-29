@@ -1,32 +1,65 @@
 <template>
 <div>
     <Hero
-        v-if="articlesData"
-        :title="articlesData.title"
-        :subtitle="articlesData.description"
-        
+        v-if="data && data.hero"
+        :title="data.hero.title"
+        :subtitle="data.hero.subtitle"
+        :picture="data.hero.picture"
+        :media-rotation="generateRandomNumber()"
+    />
+    <Articles
+        v-if="data && data.articles"
+        :articles="data.articles"
     />
 </div>
 </template>
 <script lang="ts" setup>
-import type { Picture } from '@/shared/interfaces'
+import type { ArticlesInterface } from '@/shared/interfaces'
+import { useGenericAction } from '@/shared/composable';
+
 const { find } = useStrapi()
-interface ArticleInterface {
-    title: string;
-    description: string;
-    media: Picture;
-}
-const articlesData: Ref< ArticleInterface |null> = ref(null)
-const { data, error } = await useAsyncData('articles', async () => {
-    const response = await find('article-single-type', {
-        populate: '*'
-    })
-    return response.data
+const { generateRandomNumber } = useGenericAction()
+
+
+const { data, error } = await useAsyncData<ArticlesInterface>('articles', async () => {
+    const [globalArticlesPageResult, articlesCollectionsResult] = await Promise.allSettled([
+        find('article-single-type', {
+            populate: {
+                hero: {
+                    populate: {
+                        picture: {
+                            populate: {
+                                file: {
+                                fields: ['url', 'alternativeText']
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }),
+        find('articles', {
+            populate: {
+                fields: ['title', 'documentId']
+            }
+        })
+    ])
+    console.log('articlesCollectionsResult', articlesCollectionsResult.value.data)
+    const globalArticlesPageData = globalArticlesPageResult.status === 'fulfilled' ? globalArticlesPageResult.value.data : null
+    const articlesCollections = articlesCollectionsResult.status === 'fulfilled' ? articlesCollectionsResult.value.data : null
+
+    if (globalArticlesPageData && articlesCollections) {
+    return {
+      hero: globalArticlesPageData.hero,
+      articles: articlesCollections
+    }
+  } else {
+    throw new Error('Failed to fetch data')
+  }
 })
-console.log('data', data.value.media)
-if(data.value) {
-    articlesData.value = data.value
-}
 </script>
 <style lang="scss" scoped>
+.article {
+    margin-bottom: 11rem;
+}
 </style>

@@ -7,11 +7,11 @@
             v-if="props.picture"
             class="hero__media"
             :style="{
-                '--image-rotation': `${mediaRotation}deg`
+                '--image-rotation': mediaRotation ? `${mediaRotation}deg` : '0deg'
             }"
         >
             <img
-                :src="props.picture.file.url"
+                :src="`${config.public.apiBaseUrl}${props.picture.file.url}`"
                 :alt="props.picture.file.alternativeText"
             />
         </div>
@@ -39,20 +39,18 @@
 </template>
 <script lang="ts" setup>
 import type { Picture } from '@/shared/interfaces/index'
-import type { Ref } from 'vue'
-import { useGenericAction } from '@/shared/composable/index'
 
 const props = withDefaults(defineProps<{
     title: string,
     subtitle?: string,
     displayLogo?: boolean,
+    mediaRotation?: number,
     picture?: Picture
 }>(), {
+    mediaRotation: 0,
     displayLogo: false
 })
-const { generateRandomNumber } = useGenericAction()
-const mediaRotation: Ref<number> = ref(generateRandomNumber())
-
+const config = useRuntimeConfig()
 </script>
 <style lang="scss" scoped>
 .hero {
