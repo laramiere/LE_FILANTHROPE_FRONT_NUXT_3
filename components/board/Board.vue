@@ -17,6 +17,7 @@
             <BoardFilter
                 :filters="subCategory"
                 :mainFilter="false"
+                :class="{ 'loading': boardStats.subActiveCategoryLoading }"
                 @click="changeSubCategory"
             />
         </div>
@@ -42,11 +43,15 @@ const props = defineProps<Board>()
 
 const changeMainCategory = (name : string) => {
     const newActiveCategory = props.carte_du_restaurant.sectionLvl1.find(item => item.title === name)
+    boardStats.subActiveCategoryLoading = true
     if (newActiveCategory) {
-        boardStats.mainActiveCategory = name
-        boardStats.subActiveCategory = newActiveCategory.sectionLvl2[0].title
-        boardStats.sectionActive = newActiveCategory.sectionLvl2[0]
-        activeCategory.value = newActiveCategory
+        setTimeout(() => {
+            boardStats.mainActiveCategory = name
+            boardStats.subActiveCategory = newActiveCategory.sectionLvl2[0].title
+            boardStats.sectionActive = newActiveCategory.sectionLvl2[0]
+            activeCategory.value = newActiveCategory
+            boardStats.subActiveCategoryLoading = false
+        }, 400)
     }
 }
 
@@ -81,11 +86,13 @@ const activeCategory: Ref<SectionLvl1> = ref(props.carte_du_restaurant.sectionLv
 
 const boardStats = reactive<{
     mainActiveCategory: string | null,
+    subActiveCategoryLoading: boolean,
     subActiveCategory: string | null,
     sectionActive: null | SectionLvl2
 }>({
     mainActiveCategory: null,
     subActiveCategory: null,
+    subActiveCategoryLoading: false,
     sectionActive: props.carte_du_restaurant.sectionLvl1[0].sectionLvl2[0]
 })
 

@@ -2,8 +2,11 @@
     <nav
         class="board-filter"
         :class="{ 'board-filter--secondary': mainFilter === false }"
+        @mousedown="handleMouseDown"
+        @mouseup="handleMouseUp"
+        @mousemove="handleMouseMove"
     >
-        <ul>
+        <ul ref="filterList">
             <li
                 v-for="filter in props.filters"
                 :key="filter"
@@ -28,6 +31,30 @@ const props = withDefaults(defineProps<{
 }>(), {
     mainFilter: true
 })
+const filterList = ref<HTMLElement | null>(null)
+
+let isMouseDown = false
+let startX = 0
+let scrollLeft = 0
+
+const handleMouseDown = (event: MouseEvent) => {
+    isMouseDown = true
+    startX = event.pageX - (filterList.value?.offsetLeft || 0)
+    scrollLeft = filterList.value?.scrollLeft || 0
+}
+const handleMouseUp = () => {
+    isMouseDown = false
+}
+const handleMouseMove = (event: MouseEvent) => {
+    if (!isMouseDown) return
+    console.log('handleMouseMove')
+    event.preventDefault()
+    const x = event.pageX - (filterList.value?.offsetLeft || 0)
+    const walk = (x - startX) * 2
+    if (filterList.value) {
+        filterList.value.scrollLeft = scrollLeft - walk
+    }
+}
 const filterActif: Ref<string> = ref(props.filters[0])
 
 watch(() => props.filters, (newFilters) => {
@@ -43,13 +70,25 @@ const handleClick = (name: string) => {
 </script>
 <style lang="scss" scoped>
 .board-filter {
+    position: relative;
+    z-index:1;
     background-color: $brown;
     border-radius: $global-radius;
     padding: 3rem;
+    opacity: 1;
+    transition: $transition;
+
+    &.loading {
+        z-index: 0;
+        opacity: 0;
+        transform: translateY(calc( -100% - 2rem));
+    }
 
     ul {
         display: flex;
+        overflow: hidden;
         li {
+            flex: 0 1 auto;
             &:not(:last-child) {
                 margin-right: 4rem;
             }
@@ -64,6 +103,8 @@ const handleClick = (name: string) => {
         transition: $transition;
         font-weight: $font-weight-bold;
         font-size: 3rem;
+        white-space: nowrap;
+        user-select: none;
 
         &:hover,
         &.actif {
