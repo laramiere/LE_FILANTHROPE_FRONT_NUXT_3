@@ -1,24 +1,46 @@
 <template>
-    <section class="testimonial">
-        <h2 class="fs-3">Nos chers clients</h2>
+    <section
+        class="testimonial"
+        :class="{'testimonial--noMedia': props.pictures && props.pictures.length === 0}"
+    >
+        <h2 class="fs-3">
+            {{ props.title }}
+        </h2>
         <div class="testimonial__main">
             <ul class="testimonial__list">
                 <li
-                    v-for="item in [1,2,3]"
+                    v-for="item in props.avis_clients"
+                    :key="item.documentId"
                     class="testimonial__item"
                 >
-                    <img src="/pictures/picture_1.jpg" alt="client" />
+                    <img
+                        :src="`${config.public.apiBaseUrl}${item.picture.file.url}`"
+                        :alt="item.picture.file.alternativeText"
+                        loading="lazy"
+                    />
                     <p>
-                        Impeccable sur toute la ligne ! Un restaurant de quartier comme on aimerait en voir davantage. L'accueil est chaleureux, sans être guindé. Le menu propose des prix raisonnables, y compris le dimanche. La cuisine y est simple et savoureuse (les frites maison : un délice), et il est possible de traîner en l'heure du café, autour de jeux de société mis à disposition gratuitement. Seul bémol si vous venez en voiture : un cauchemar pour se garer à proximité.
+                        {{ item.content }}
                     </p>
                 </li>
             </ul>
-            <div class="testimonial__media">
-                <img src="/pictures/picture_3.jpg" alt="mon média"/>
+            <div
+                v-if="props.pictures && props.pictures.length"
+                class="testimonial__media"
+            >
+                <img
+                    :src="`${config.public.apiBaseUrl}${props.pictures[0].file.url}`"
+                    :alt="props.pictures[0].file.alternativeText"
+                    loading="lazy"
+                />
             </div>
         </div>
     </section>
 </template>
+<script lang="ts" setup>
+import type { TestimonialComponent } from '@/shared/interfaces'
+const config = useRuntimeConfig()
+const props = defineProps<TestimonialComponent>()
+</script>
 <style lang="scss" scoped>
 .testimonial {
     margin-bottom: 11rem;
@@ -27,10 +49,22 @@
         margin-bottom: 5rem;
     }
 
+    &--noMedia {
+        .testimonial__main {
+            grid-template-columns: 100%;
+        }
+    }
+
     &__main {
         display: grid;
         grid-template-columns: 69% 29%;
         column-gap: 2%;
+    }
+
+    &__list {
+        &:only-child {
+            width: 100%;
+        }
     }
 
     &__item {

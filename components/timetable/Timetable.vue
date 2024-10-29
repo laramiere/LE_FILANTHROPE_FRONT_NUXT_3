@@ -33,7 +33,7 @@
     <div class="timetable__side">
         <img
             class="timetable__media"
-            :src="activeItem?.picture ? `http://localhost:1337${activeItem.picture.file.url}` : '/pictures/picture_8.jpg'"
+            :src="activeItem?.picture ? `${config.public.apiBaseUrl}${activeItem.picture.file.url}` : '/pictures/picture_8.jpg'"
             :alt=" activeItem?.picture ? activeItem.picture.file.alternativeText : 'Manger'"
             loading="lazy"
         >
@@ -45,6 +45,7 @@
 import type { TimetableComponent, TimetableItem } from '@/shared/interfaces'
 type KeyType = 0 | 1 | 2 | 3 | 4 | 5 | 6
 const props = defineProps<TimetableComponent>()
+const config = useRuntimeConfig()
 const dayIndex: KeyType = new Date().getDay() as KeyType
 const mapperDay: { [key in KeyType]: number } = {
     0: 6,
