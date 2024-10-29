@@ -112,6 +112,7 @@ const { data, error } = await useAsyncData('home', async () => {
       }
     }
   })
+  console.log('response.data', response.data)
   return response.data
 })
 const getComponent = (name: ComponentName) => {
