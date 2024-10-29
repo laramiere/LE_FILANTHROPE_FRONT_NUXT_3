@@ -56,13 +56,13 @@
 <script lang="ts" setup>
 import type { Ref } from 'vue'
 import type { HeaderMenuItem } from '@/shared/interfaces/index'
-import { useMouse } from '@/shared/composable/index'
+import { useGenericAction } from '@/shared/composable/index'
 
 const props = defineProps<{
     items: HeaderMenuItem[],
     visible: boolean
 }>()
-const { generateRandomNumber } = useMouse()
+const { generateRandomNumber } = useGenericAction()
 const itemActif: Ref<HeaderMenuItem | null> = ref(null)
 
 const imageRotation: Ref<number> = ref(0)
@@ -113,10 +113,12 @@ const emit = defineEmits(['closeOnCloseMenuBtn'])
         > nav {
             display: flex;
             align-items: center;
+
             ul {
                 list-style-type: none;
                 padding: 0;
                 margin: 0;
+
                 li {
                     &:not(:last-child) {
                         a {
@@ -151,6 +153,7 @@ const emit = defineEmits(['closeOnCloseMenuBtn'])
             transform: translate(-50%,-50%) rotate(var(--image-rotation));
             overflow: hidden;
             border-radius: $global-radius;
+
             img {
                 display: block;
                 width: 100%;
