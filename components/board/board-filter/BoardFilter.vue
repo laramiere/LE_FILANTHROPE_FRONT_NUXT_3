@@ -47,7 +47,6 @@ const handleMouseUp = () => {
 }
 const handleMouseMove = (event: MouseEvent) => {
     if (!isMouseDown) return
-    console.log('handleMouseMove')
     event.preventDefault()
     const x = event.pageX - (filterList.value?.offsetLeft || 0)
     const walk = (x - startX) * 2

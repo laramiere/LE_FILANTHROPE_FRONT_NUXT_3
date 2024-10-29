@@ -1,14 +1,40 @@
 <template>
-    <div class="board-item">
+    <div
+        class="board-item"
+        itemscope
+        itemtype="https://schema.org/MenuItem"
+    >
         <div class="board-item__top">
-            <h3 class="board-item__title">
+            <h3
+                class="board-item__title"
+                itemprop="name"
+            >
                 {{ props.item.title }}
             </h3>
-            <div class="price">
-                {{ props.item.price }}€
+            <div
+                class="price"
+                itemscope
+                itemtype="https://schema.org/Offer"
+            >
+                <span
+                    itemprop="price"
+                    :content="props.item.price"
+                >
+                    {{ props.item.price }}
+                </span>
+                <span
+                    itemprop="priceCurrency"
+                    content="EUR"
+                >
+                    €
+                </span>
             </div>
         </div>
-        <p v-if="props.item.subtitle" class="board-item__desc">
+        <p
+            v-if="props.item.subtitle"
+            class="board-item__desc"
+            itemprop="description"
+        >
             {{ props.item.subtitle }}
         </p>
     </div>
