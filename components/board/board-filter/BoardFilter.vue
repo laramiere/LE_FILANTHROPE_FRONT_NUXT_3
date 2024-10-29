@@ -63,8 +63,10 @@ const emit = defineEmits<{
     (event: 'click', value: string) : void
 }>()
 const handleClick = (name: string) => {
-    filterActif.value = name
-    emit('click', name)
+    if (filterActif.value !== name) {
+        filterActif.value = name
+        emit('click', name)
+    }
 }
 </script>
 <style lang="scss" scoped>
