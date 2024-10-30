@@ -1,5 +1,8 @@
 <template>
-    <div class="article">
+    <div
+        v-if="props.articles.length"
+        class="article"
+    >
         <ArticleItem
             v-for="(article, key) in props.articles"
             :key="article.id"
@@ -15,3 +18,12 @@ const props = defineProps<{
     articles: ArticleItem[]
 }>()
 </script>
+<style lang="scss" scoped>
+.article {
+    .article-item {
+        &:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+    }
+}
+</style>

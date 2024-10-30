@@ -1,0 +1,18 @@
+@keyframes swing {
+    0% {
+      transform: rotateX(-90deg);
+    }
+    50% {
+      transform: rotateX(30deg);
+    }
+    70% {
+      transform: rotateX(-30deg);
+    }
+    100% {
+      transform: rotateX(0deg);
+    }
+}
+
+.swing-animation {
+    animation: swing .6s ease-in-out forwards;
+}

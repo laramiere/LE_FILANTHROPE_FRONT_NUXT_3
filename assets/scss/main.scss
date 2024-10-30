@@ -1,7 +1,7 @@
-@import './settings//settings.index';
+@import './settings/settings.index';
 @import './reset';
 @import './tools/tools.index';
-
+@import './animations';
 html {
     background-color: $white;
 }

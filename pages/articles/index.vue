@@ -5,7 +5,6 @@
         :title="data.hero.title"
         :subtitle="data.hero.subtitle"
         :picture="data.hero.picture"
-        :media-rotation="generateRandomNumber()"
     />
     <Articles
         v-if="data && data.articles"
@@ -14,14 +13,10 @@
 </div>
 </template>
 <script lang="ts" setup>
-import type { ArticlesInterface } from '@/shared/interfaces'
-import { useGenericAction } from '@/shared/composable';
-
+import type { ArticlesInterface } from '@/shared/interfaces';
 const { find } = useStrapi()
-const { generateRandomNumber } = useGenericAction()
 
-
-const { data, error } = await useAsyncData<ArticlesInterface>('articles', async () => {
+const { data, error } = await useAsyncData('articles', async () => {
     const [globalArticlesPageResult, articlesCollectionsResult] = await Promise.allSettled([
         find('article-single-type', {
             populate: {
@@ -44,7 +39,6 @@ const { data, error } = await useAsyncData<ArticlesInterface>('articles', async 
             }
         })
     ])
-    console.log('articlesCollectionsResult', articlesCollectionsResult.value.data)
     const globalArticlesPageData = globalArticlesPageResult.status === 'fulfilled' ? globalArticlesPageResult.value.data : null
     const articlesCollections = articlesCollectionsResult.status === 'fulfilled' ? articlesCollectionsResult.value.data : null
 

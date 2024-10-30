@@ -46,5 +46,5 @@ export default defineNuxtConfig({
     },
   ],
 
-  modules: ['@nuxtjs/strapi'],
+  modules: ['@nuxtjs/strapi', '@vueuse/nuxt'],
 })

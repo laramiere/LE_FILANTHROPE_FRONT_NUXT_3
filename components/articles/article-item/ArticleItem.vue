@@ -1,7 +1,9 @@
 <template>
     <nuxt-link
         class="article-item"
-        :to="props.link"
+        :class="{ 'swing-animation': articleIsVisible }"
+        :to="`/articles/${props.link}`"
+        ref="articleItemRef"
     >
         <div>
             <div class="article-item__main">
@@ -17,11 +19,15 @@
     </nuxt-link>
 </template>
 <script lang="ts" setup>
+import { useElementVisibility } from '@vueuse/core'
+import { ref } from 'vue'
 const props = defineProps<{
     title: string;
     link: string;
     number: number;
 }>()
+const articleItemRef = ref(null)
+const articleIsVisible = useElementVisibility(articleItemRef)
 const getNumber = computed(() => {
     return props.number < 10 ? `0${props.number}` : props.number
 })
@@ -37,7 +43,9 @@ const getNumber = computed(() => {
     overflow: hidden;
     transition: $transition;
     border-radius: $global-radius;
-
+    transform: rotateX(-90deg);
+    transform-origin: top center;
+    border: .1rem solid $black;
     &::before {
         content: '';
         z-index: 1;
@@ -74,9 +82,11 @@ const getNumber = computed(() => {
         font-size: 4rem;
         text-align: left;
     }
+
     &:hover {
         color: $white;
-        border-bottom: .1rem solid $brown;
+        border: .1rem solid $brown;
+
         &::before {
             top: 0;
         }

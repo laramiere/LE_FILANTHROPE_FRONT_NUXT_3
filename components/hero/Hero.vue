@@ -6,8 +6,9 @@
         <div
             v-if="props.picture"
             class="hero__media"
+            :class="{'visible': visible}"
             :style="{
-                '--image-rotation': mediaRotation ? `${mediaRotation}deg` : '0deg'
+                '--image-rotation':`${mediaRotation}deg`
             }"
         >
             <img
@@ -39,18 +40,24 @@
 </template>
 <script lang="ts" setup>
 import type { Picture } from '@/shared/interfaces/index'
-
+import { useGenericAction } from '@/shared/composable';
+import { onMounted } from 'vue';
 const props = withDefaults(defineProps<{
     title: string,
     subtitle?: string,
     displayLogo?: boolean,
-    mediaRotation?: number,
     picture?: Picture
 }>(), {
-    mediaRotation: 0,
     displayLogo: false
 })
+const { generateRandomNumber } = useGenericAction()
+const mediaRotation = ref<number>(0)
+const visible = ref(false)
 const config = useRuntimeConfig()
+onMounted (() => {
+    mediaRotation.value = generateRandomNumber()
+    visible.value = true
+})
 </script>
 <style lang="scss" scoped>
 .hero {
@@ -80,7 +87,12 @@ const config = useRuntimeConfig()
         border-radius: $global-radius;
         overflow: hidden;
         transform: translate(-50%,-50%) rotate(var(--image-rotation));
+        transition: $transition;
+        opacity: 0;
 
+        &.visible {
+            opacity: 1;
+        }
         img {
             display: block;
             width: 100%;
