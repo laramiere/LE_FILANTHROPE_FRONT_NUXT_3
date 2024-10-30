@@ -1,4 +1,4 @@
-export function useMouse (): {
+export function useGenericAction (): {
     generateRandomNumber: () => number
 } {
     function generateRandomNumber (): number {
