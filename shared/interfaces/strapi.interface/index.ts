@@ -1,5 +1,0 @@
-export * from './singleType.interface'
-export * from './global.interface'
-export * from './hero.interface'
-export * from './components.interface'
-export * from './pages/home.interface'

@@ -34,9 +34,7 @@ const { data, error } = await useAsyncData('articles', async () => {
             }
         }),
         find('articles', {
-            populate: {
-                fields: ['title', 'documentId']
-            }
+            fields: ['title', 'slug', 'id']
         })
     ])
     const globalArticlesPageData = globalArticlesPageResult.status === 'fulfilled' ? globalArticlesPageResult.value.data : null

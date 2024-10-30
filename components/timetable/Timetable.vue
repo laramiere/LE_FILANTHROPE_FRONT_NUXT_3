@@ -1,5 +1,8 @@
 <template>
-<section class="wrapper timetable">
+<section
+    class="wrapper timetable"
+    :class="{'small': props.smallDisplay}"
+>
     <div class="timetable__main">
         <h2
             v-if="props.title"
@@ -117,6 +120,33 @@ const activeItem : null | TimetableItem = tiemTableItem ?? null
             object-fit: cover;
             border-radius: $global-radius;
             overflow: hidden;
+        }
+    }
+
+    &.small {
+        display: flex;
+        flex-direction: column-reverse;
+        background-color: transparent;
+        padding: 0;
+
+        .timetable__side {
+            margin-bottom: 2rem;
+        }
+
+        .timetable__list {
+            display: block;
+        }
+
+        .timetable__item {
+            background-color: $orange;
+            border-radius: $global-radius;
+            text-align: right;
+            padding: 2rem;
+            margin-bottom: 0;
+
+            &:not(.timetable__item--actif) {
+                display: none;
+            }
         }
     }
 }
