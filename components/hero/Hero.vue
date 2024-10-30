@@ -1,7 +1,10 @@
 <template>
     <section
         class="hero"
-        :class="{ 'hero--small': !displayLogo }"
+        :class="{
+            'hero--small': small,
+            'hero--article': article
+        }"
     >
         <div
             v-if="props.picture"
@@ -46,7 +49,9 @@ const props = withDefaults(defineProps<{
     title: string,
     subtitle?: string,
     displayLogo?: boolean,
-    picture?: Picture
+    picture?: Picture,
+    small?: boolean,
+    article?: boolean
 }>(), {
     displayLogo: false
 })
@@ -70,10 +75,27 @@ onMounted (() => {
     padding-bottom: 5rem;
     margin-bottom: 6rem;
 
+    &--article,
+    &--small {
+        #{$c}__content {
+            h2 {
+                padding-left: 0;
+            }
+        }
+    }
+
     &--small {
         #{$c}__content {
             h1 {
                 font-size: 8rem;
+            }
+        }
+    }
+
+    &--article {
+        #{$c}__content {
+            h1 {
+                font-size: 6rem;
             }
         }
     }

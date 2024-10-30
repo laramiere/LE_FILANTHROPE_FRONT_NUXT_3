@@ -5,6 +5,7 @@
         :title="data.hero.title"
         :subtitle="data.hero.subtitle"
         :picture="data.hero.picture"
+        small
     />
     <Articles
         v-if="data && data.articles"
@@ -13,7 +14,6 @@
 </div>
 </template>
 <script lang="ts" setup>
-import type { ArticlesInterface } from '@/shared/interfaces';
 const { find } = useStrapi()
 
 const { data, error } = await useAsyncData('articles', async () => {

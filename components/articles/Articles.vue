@@ -7,7 +7,7 @@
             v-for="(article, key) in props.articles"
             :key="article.id"
             :title="article.title"
-            :link="article.documentId"
+            :slug="article.slug"
             :number="key + 1"
         />
     </div>

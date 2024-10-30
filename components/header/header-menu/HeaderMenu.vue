@@ -30,7 +30,10 @@
                         @mouseover="handleMouseOverItemMenu(key)"
                         @mouseleave="itemActif = null"
                     >
-                        <NuxtLink :to="item.link">
+                        <NuxtLink
+                            :to="item.link"
+                             @click="emit('closeOnCloseMenuBtn')"
+                        >
                             {{ item.label }}
                         </NuxtLink>
                     </li>

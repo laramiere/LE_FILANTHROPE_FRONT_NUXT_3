@@ -6,4 +6,5 @@ export interface ArticleItem {
     visible: boolean;
     id: number;
     documentId: string;
+    slug: string;
 }

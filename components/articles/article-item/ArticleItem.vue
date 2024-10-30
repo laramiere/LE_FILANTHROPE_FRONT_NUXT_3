@@ -2,7 +2,7 @@
     <nuxt-link
         class="article-item"
         :class="{ 'swing-animation': articleIsVisible }"
-        :to="`/articles/${props.link}`"
+        :to="`/articles/${props.slug}`"
         ref="articleItemRef"
     >
         <div>
@@ -23,7 +23,7 @@ import { useElementVisibility } from '@vueuse/core'
 import { ref } from 'vue'
 const props = defineProps<{
     title: string;
-    link: string;
+    slug: string;
     number: number;
 }>()
 const articleItemRef = ref(null)
