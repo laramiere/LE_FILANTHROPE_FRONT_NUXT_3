@@ -68,7 +68,7 @@ onMounted (() => {
     background-color: $white;
     padding-top: 15.5rem;
     padding-bottom: 5rem;
-    margin-bottom: $margin-lg;
+    margin-bottom: 6rem;
 
     &--small {
         #{$c}__content {
