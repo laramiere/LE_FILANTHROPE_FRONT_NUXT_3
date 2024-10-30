@@ -12,12 +12,20 @@ export interface BaseComponent {
     id: number;
 }
 
+export interface Media {
+    id: number;
+    alternativeText?: string;
+    url: string;
+    name: string;
+    documentId: string;
+    provider: string;
+}
 export interface Picture {
     id: string;
     file: {
         alternativeText: string;
         url: string;
-        id: number;
-        documentId: string;
+        id?: number;
+        documentId?: string;
     }
 }
