@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<{
     background-color: $white;
     padding-top: 15.5rem;
     padding-bottom: 5rem;
-    margin-bottom: $margin-lg;
+    margin-bottom: 6rem;
     &__main {
         display: flex;
         align-items: flex-end;
@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<{
 
         h1 {
             text-transform: uppercase;
-            font-size: 15rem;
+            font-size: 13.5rem;
             line-height: 1;
         }
         h2 {

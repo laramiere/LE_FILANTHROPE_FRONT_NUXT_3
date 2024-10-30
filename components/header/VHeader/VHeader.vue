@@ -60,7 +60,7 @@ const headerItems: HeaderMenuItem[] = [
 <style lang="scss" scoped>
 .header {
     position: relative;
-    z-index: 1;
+    z-index: 10;
     &.hidden {
         .header-nav {
             top: -100%;
