@@ -12,6 +12,7 @@
     "sbb": "storybook build"
   },
   "dependencies": {
+    "@nuxtjs/leaflet": "^1.2.4",
     "@nuxtjs/storybook": "^8.2.0",
     "@nuxtjs/strapi": "^1.12.0",
     "nuxt": "^3.13.0",
