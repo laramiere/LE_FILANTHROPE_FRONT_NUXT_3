@@ -5,7 +5,7 @@
                 <Gift />
                 Cadeau
             </VButton>
-            <VButton>
+            <VButton @click="handleClickOnLink('/reservation')">
                 <Calendar />
                 Reserver
             </VButton>
@@ -17,6 +17,10 @@
 </template>
 <script lang="ts" setup>
 const emit = defineEmits(['clickOnOpenMenuBtn'])
+const router = useRouter()
+const handleClickOnLink = (link: string) => {
+    router.push(link)
+}
 </script>
 <style lang="scss" scoped>
 .header-nav {

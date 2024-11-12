@@ -1,5 +1,5 @@
 import type { Media } from '../../components/components.interface'
-import type { TimetableComponent } from '../../components/components.interface'
+import type { TimetableComponent } from '../../components'
 export interface ArticleItem {
     title: string;
     content: string;

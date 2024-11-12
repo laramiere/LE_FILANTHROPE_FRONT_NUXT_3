@@ -37,9 +37,7 @@ import type { ArticleItem } from '@/shared/interfaces'
 import { ComponentKeys } from '@/shared/interfaces'
 const { findOne } = useStrapi()
 const route = useRoute()
-console.log('route.params', route.params.id)
 const {data: article, error} = await useAsyncData<ArticleItem>('article', async () => {
-    console.log('async', route.params.id)
     const article = await findOne('articles', {
         filters: {
             slug: {

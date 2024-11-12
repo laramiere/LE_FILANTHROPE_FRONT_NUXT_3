@@ -47,7 +47,7 @@ const headerItems: HeaderMenuItem[] = [
         label: 'Reserver',
         img: '/pictures/picture_4.jpg',
         alt: 'Reserver',
-        link: '/reserver'
+        link: '/reservation'
     },
     {
         label: 'Articles',

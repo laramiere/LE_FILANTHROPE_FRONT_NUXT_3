@@ -17,6 +17,7 @@
 const { find } = useStrapi()
 
 const { data, error } = await useAsyncData('articles', async () => {
+
     const [globalArticlesPageResult, articlesCollectionsResult] = await Promise.allSettled([
         find('article-single-type', {
             populate: {
@@ -45,6 +46,7 @@ const { data, error } = await useAsyncData('articles', async () => {
       hero: globalArticlesPageData.hero,
       articles: articlesCollections
     }
+
   } else {
     throw new Error('Failed to fetch data')
   }

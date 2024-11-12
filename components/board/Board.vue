@@ -1,10 +1,13 @@
 <template>
     <section class="board">
-        <h2 class="board__title fs-3">
+        <h2
+            v-if="props.displayTitle"
+            class="board__title fs-3"
+        >
             {{ props.carte_du_restaurant.title }}
         </h2>
         <p
-            v-if="props.carte_du_restaurant.subtitle"
+            v-if="props.displaySubtitle && props.carte_du_restaurant.subtitle"
             class="board__subtitle"
         >
             {{ props.carte_du_restaurant.subtitle }}

@@ -4,5 +4,7 @@ import { ComponentKeys } from '../componentKeys'
 
 export interface Board extends BaseComponent {
     __component: ComponentKeys.Board;
-    carte_du_restaurant: CardRestaurant
+    carte_du_restaurant: CardRestaurant;
+    displayTitle?: boolean;
+    displaySubtitle: boolean;
 }
