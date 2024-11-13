@@ -1,7 +1,18 @@
 <template>
+    <a
+        v-if="props.externalLink"
+        class="c-btn c-btn--link"
+        :class="{ 'c-btn--rounded': props.rounded }"
+        target="_blank"
+    >
+        <span>
+            <slot />
+        </span>
+    </a>
     <button
+        v-else
         class="c-btn"
-        :class="{ 'c-btn--rounded': rounded }"
+        :class="{ 'c-btn--rounded': props.rounded }"
         @click="emit('click')"
     >
         <span>
@@ -12,11 +23,13 @@
 <script setup lang="ts">
 
 interface Props {
-    rounded?: boolean
+    rounded?: boolean;
+    externalLink?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    rounded: false
+    rounded: false,
+    externalLink: false
 })
 const emit = defineEmits(['click'])
 
@@ -62,6 +75,7 @@ const emit = defineEmits(['click'])
         z-index: 2;
         display: flex;
         align-items: center;
+
         > svg {
             fill: currentColor;
             display: block;
@@ -69,6 +83,11 @@ const emit = defineEmits(['click'])
             height: auto;
             margin-right: .8rem;
         }
+    }
+
+    &--link {
+        display: inline-block;
+        text-decoration: none;
     }
 
     &--rounded {

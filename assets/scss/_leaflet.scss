@@ -1,0 +1,23 @@
+.map-custom-pin {
+    &.pin-actif {
+        > button {
+            background-color: $orange;
+            animation: bounce .8s ease-in-out;
+        }
+    }
+    > button {
+        width: 4rem;
+        height: 4rem;
+        background-color: $brown;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: transparent;
+        cursor: pointer;
+
+        svg {
+            fill: $white;
+        }
+    }
+}
