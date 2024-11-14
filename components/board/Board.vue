@@ -42,7 +42,10 @@ import type { Ref } from 'vue'
 
 import { computed } from 'vue'
 
-const props = defineProps<Board>()
+const props = withDefaults(defineProps<Board>(), {
+    displayTitle: true,
+    displaySubtitle: true
+})
 
 const changeMainCategory = (name : string) => {
     const newActiveCategory = props.carte_du_restaurant.sectionLvl1.find(item => item.title === name)

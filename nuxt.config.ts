@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+
   devtools: { enabled: true },
 
   runtimeConfig: {
@@ -46,5 +47,8 @@ export default defineNuxtConfig({
     },
   ],
 
-  modules: ['@nuxtjs/strapi', '@vueuse/nuxt'],
+  modules: [
+    '@vueuse/nuxt',
+    '@nuxtjs/strapi'
+  ],
 })

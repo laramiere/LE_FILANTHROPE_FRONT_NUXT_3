@@ -14,6 +14,7 @@
   "dependencies": {
     "@nuxtjs/storybook": "^8.2.0",
     "@nuxtjs/strapi": "^1.12.0",
+    "leaflet": "^1.9.4",
     "nuxt": "^3.13.0",
     "qs": "^6.13.0",
     "vue": "latest",
@@ -28,6 +29,7 @@
     "@storybook/addon-outline": "^8.3.1",
     "@storybook/addon-toolbars": "^8.3.1",
     "@storybook/addon-viewport": "^8.3.1",
+    "@types/leaflet": "^1.9.14",
     "@types/node": "^18.17.5",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",

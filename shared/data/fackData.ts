@@ -1,5 +1,5 @@
-import type { Time, Category, Board } from '../interfaces'
-
+import type { Time, Category, Board, POIInterface } from '../interfaces'
+import { IconKeys } from '../interfaces'
 export const richTextAccueil = `
 <p>
 Bistrot le Filanthrope est né en 2018, C’est avant tout une belle équipe qui aime bien rigoler et qui trinque facilement.
@@ -164,3 +164,63 @@ export const board: Board = {
     subtitle: 'Retrouvez ici tout ce que le filanthrope a de meilleur à vous proposer',
     category: boardCategory
 }
+
+const POIMonChervet : POIInterface = {
+    id: 1,
+    documentId:'bbvuje89',
+    title: 'GAEC de Montchervet',
+    content: '<p>Nous vous proposons des produits de nos animaux nés, élevés, finis et transformés à la ferme. Choisissez parmi la charcuterie, la boucherie et la fromagerie issus de nos cochons, de nos vaches laitières Montbéliardes et de nos poules pondeuses.</p>',
+    lat: 44.353060,
+    lng: 1.878860,
+    pin: IconKeys.Food,
+    picture: {
+        documentId: 'bhdfieu56',
+        id: 123,
+        name: 'GAEC',
+        provider: 'toto',
+        url: '/pictures/picture_montchervet.png',
+        alternativeText: 'Gaec de Montchervet'
+    },
+    link: 'http://google.fr'
+}
+const brasserie : POIInterface = {
+    id: 2,
+    documentId:'bbvuje893',
+    title: 'Brasserie du Pilat',
+    content: '<p>La Brasserie du Pilat brasse en Auvergne Rhône-Alpes des bières artisanales 100% bio depuis 2002. À la frontière entre l’Ardèche et la Loire, venez visiter notre bar et déguster l’une de nos 13 bières artisanales dans le cadre chaleureux d’un bâtiment en bois et découvrir notre brasserie artisanale.</p>',
+    lat: 49.258327,
+    lng: 4.031696,
+    pin: IconKeys.Drink,
+    picture: {
+        documentId: 'bhdfieu356',
+        id: 1223,
+        name: 'Brasserie',
+        provider: 'toto',
+        url: '/pictures/picture_2.jpg',
+        alternativeText: 'Brasserie'
+    },
+    link: 'https://www.brasseriedupilat.com/'
+}
+const poisson : POIInterface = {
+    id: 3,
+    documentId:'b4bvuje89',
+    title: 'Murgat',
+    content: '<p>Notre pisciculture est implantée, depuis 1898, au pied des contreforts alpins, sur les sources naturelles des Fontaines de l’Oron. Nous vous proposons tout au long de l’année des Truites Fario, Ombles Chevaliers, Saumons de Fontaine et Truites Arc-en-Ciel.</p>',
+    lat: 45.877129,
+    lng: 5.91122,
+    pin: IconKeys.Drink,
+    picture: {
+        documentId: 'bhdfieu7356',
+        id: 786,
+        name: 'Charles Murgat',
+        provider: 'toto',
+        url: '/pictures/picture_3.jpg',
+        alternativeText: 'Charles Murgat'
+    },
+    link: 'https://www.charlesmurgat.com/'
+}
+export const POI: POIInterface[] = [
+    POIMonChervet,
+    brasserie,
+    poisson
+]

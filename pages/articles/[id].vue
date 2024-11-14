@@ -68,7 +68,6 @@ const {data: article, error} = await useAsyncData<ArticleItem>('article', async 
               }
         }
     })
-    console.log('article', article)
     return article.data[0] as ArticleItem
 })
 </script>

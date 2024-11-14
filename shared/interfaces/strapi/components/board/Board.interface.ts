@@ -6,5 +6,5 @@ export interface Board extends BaseComponent {
     __component: ComponentKeys.Board;
     carte_du_restaurant: CardRestaurant;
     displayTitle?: boolean;
-    displaySubtitle: boolean;
+    displaySubtitle?: boolean;
 }
