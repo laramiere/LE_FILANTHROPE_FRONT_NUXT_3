@@ -16,8 +16,8 @@
             </div>
             <div class="map__media gr">
               <img
-                :src="activeItem.media.url"
-                :alt="activeItem.media.alternativeText || activeItem.title"
+                :src="`${config.public.apiBaseUrl}${activeItem.picture.url}`"
+                :alt="activeItem.picture.alternativeText || activeItem.title"
                 loading="lazy"
               />
             </div>
@@ -31,27 +31,20 @@ import "@/assets/scss/_leaflet.scss"
 import type { Ref } from 'vue'
 import type { POIInterface } from '@/shared/interfaces'
 import { IconObject } from '@/shared/interfaces'
-import { POI } from '@/shared/data/fackData'
 
-
+const props = defineProps<{pois: POIInterface[]}>()
+const config = useRuntimeConfig()
 const zoom = ref(12);
 const center: Ref<[number,number]> = ref([45.764042, 4.835659]);
 const map = ref<LMap | null>(null);
-const tile = {
-  url: 'https://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',
-  attribution: 'Google',
-  layerType: 'base',
-  name: 'OpenStreetMap',
-  subDomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-};
-const fakeMarkerArray: POIInterface[] = POI
-const activeItem: Ref<POIInterface> = ref(fakeMarkerArray[0])
+const activeItem: Ref<POIInterface> = ref(props.pois[0])
 
 onMounted(async () => {
   const L = (await import('leaflet')).default;
-  const generateDivIcon = (icon: string) => {
+
+  const generateDivIcon = (icon: string, activePin: boolean) => {
     return L.divIcon({
-      className: 'map-custom-pin',
+      className: `map-custom-pin ${activePin ? 'pin-actif' : ''}`,
       html: `<button>
               <span>${IconObject[icon]}</span>
             </button>`
@@ -68,15 +61,19 @@ onMounted(async () => {
   }
 
   const generateMarker = () => {
-    fakeMarkerArray.forEach(item => {
-      L.marker(item.latlng, {icon: generateDivIcon(item.pin)}).on('click', (event) => {
+    props.pois.forEach((item, key) => {
+      console.log('key', key)
+      L.marker([item.lat, item.lng], {icon: generateDivIcon(item.pin, key === 0)}).on('click', (event) => {
         const latLng = [event.target._latlng.lat, event.target._latlng.lng]
         removeActivClassOnPin()
         event.target._icon.classList.add('pin-actif')
-        activeItem.value = fakeMarkerArray.find(item => item.latlng[0] === latLng[0] && item.latlng[1] === latLng[1]) || fakeMarkerArray[0]
+        activeItem.value = props.pois.find(item => item.lat === latLng[0] && item.lng === latLng[1]) || props.pois[0]
         map.value.flyTo(latLng)
       }).addTo(map.value)
     })
+
+    const bounds = new L.LatLngBounds(props.pois.map(item => [item.lat, item.lng]))
+    map.value.fitBounds(bounds)
   }
 
   map.value = L.map('map', {
@@ -93,8 +90,6 @@ onMounted(async () => {
   }).addTo(map.value);
 
   generateMarker()
-  const bounds = new L.LatLngBounds(fakeMarkerArray.map(item => item.latlng))
-  map.value.fitBounds(bounds)
 });
 </script>
 <style lang="scss" scoped>
@@ -108,7 +103,7 @@ onMounted(async () => {
         position: relative;
         width: 100%;
         min-height: 80rem;
-        background-color: $orange;
+        background-color: $white;
     }
 
     &__side {

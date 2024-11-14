@@ -166,11 +166,14 @@ export const board: Board = {
 }
 
 const POIMonChervet : POIInterface = {
+    id: 1,
+    documentId:'bbvuje89',
     title: 'GAEC de Montchervet',
     content: '<p>Nous vous proposons des produits de nos animaux nés, élevés, finis et transformés à la ferme. Choisissez parmi la charcuterie, la boucherie et la fromagerie issus de nos cochons, de nos vaches laitières Montbéliardes et de nos poules pondeuses.</p>',
-    latlng: [44.353060, 1.878860],
+    lat: 44.353060,
+    lng: 1.878860,
     pin: IconKeys.Food,
-    media: {
+    picture: {
         documentId: 'bhdfieu56',
         id: 123,
         name: 'GAEC',
@@ -181,11 +184,14 @@ const POIMonChervet : POIInterface = {
     link: 'http://google.fr'
 }
 const brasserie : POIInterface = {
+    id: 2,
+    documentId:'bbvuje893',
     title: 'Brasserie du Pilat',
     content: '<p>La Brasserie du Pilat brasse en Auvergne Rhône-Alpes des bières artisanales 100% bio depuis 2002. À la frontière entre l’Ardèche et la Loire, venez visiter notre bar et déguster l’une de nos 13 bières artisanales dans le cadre chaleureux d’un bâtiment en bois et découvrir notre brasserie artisanale.</p>',
-    latlng: [49.258327, 4.031696],
+    lat: 49.258327,
+    lng: 4.031696,
     pin: IconKeys.Drink,
-    media: {
+    picture: {
         documentId: 'bhdfieu356',
         id: 1223,
         name: 'Brasserie',
@@ -196,11 +202,14 @@ const brasserie : POIInterface = {
     link: 'https://www.brasseriedupilat.com/'
 }
 const poisson : POIInterface = {
+    id: 3,
+    documentId:'b4bvuje89',
     title: 'Murgat',
     content: '<p>Notre pisciculture est implantée, depuis 1898, au pied des contreforts alpins, sur les sources naturelles des Fontaines de l’Oron. Nous vous proposons tout au long de l’année des Truites Fario, Ombles Chevaliers, Saumons de Fontaine et Truites Arc-en-Ciel.</p>',
-    latlng: [45.877129, 5.91122],
+    lat: 45.877129,
+    lng: 5.91122,
     pin: IconKeys.Drink,
-    media: {
+    picture: {
         documentId: 'bhdfieu7356',
         id: 786,
         name: 'Charles Murgat',

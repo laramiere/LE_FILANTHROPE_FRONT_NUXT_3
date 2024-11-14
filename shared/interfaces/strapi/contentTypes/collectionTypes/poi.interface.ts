@@ -5,7 +5,10 @@ export interface POIInterface {
     title: string;
     content: string;
     link: string;
-    latlng: [number, number];
+    lat: number;
+    lng: number;
     pin: IconType;
-    media: Media;
+    picture: Media;
+    id: number;
+    documentId: string;
 }
