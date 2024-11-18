@@ -119,7 +119,7 @@
             h3 {
                 font-size: 6rem;
                 text-transform: uppercase;
-                line-height: 1;
+                line-height: 1.2;
                 margin-bottom: 2rem;
 
                 @include mq($until: desktop) {
@@ -188,7 +188,7 @@
                     transition: $transition;
 
                     @include mq($until: desktop) {
-                        padding: 2rem 0;
+                        padding: 2rem 1rem;
                         font-size: 3rem;
                     }
 
