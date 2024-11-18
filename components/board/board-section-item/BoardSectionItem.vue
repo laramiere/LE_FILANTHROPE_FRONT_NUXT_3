@@ -56,6 +56,10 @@ const props = defineProps<{
         font-size: 3rem;
         text-transform: uppercase;
 
+        @include mq($until: desktop) {
+            font-size: 1.8rem;
+        }
+
         &:hover {
             cursor: pointer;
             > span {
@@ -75,6 +79,11 @@ const props = defineProps<{
             border: .1rem solid $black;
             transform: rotate(45deg);
             transition: $transition;
+
+            @include mq($until: desktop) {
+                width: 3rem;
+                height: 3rem;
+            }
 
             svg {
                 fill: currentColor;

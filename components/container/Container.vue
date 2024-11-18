@@ -18,8 +18,17 @@
     background-color: $white;
     display: flex;
     margin-bottom: $margin-lg;
+
+    @include mq($until: desktop) {
+        margin-bottom: 9rem;
+    }
+
     &__main {
         width: 60%;
+
+        @include mq($until: desktop) {
+            width: 100%;
+        }
     }
 
     &__side {

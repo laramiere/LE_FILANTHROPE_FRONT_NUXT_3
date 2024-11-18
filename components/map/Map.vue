@@ -98,11 +98,22 @@ onMounted(async () => {
     column-gap: 2rem;
     margin-bottom: 11rem;
 
+    @include mq($until: desktop) {
+      display: block;
+      margin-bottom: 9rem;
+    }
+
     &__main {
         position: relative;
         width: 100%;
         min-height: 80rem;
         background-color: $white;
+
+        @include mq($until: desktop) {
+          padding-top: 56%;
+          min-height: 1rem;
+          margin-bottom: 2rem;
+        }
     }
 
     &__side {
@@ -118,8 +129,21 @@ onMounted(async () => {
       max-height: 40rem;
       overflow-y: auto;
 
+      @include mq($until: desktop) {
+        padding: 2rem;
+
+        h2 {
+          font-size: 1.8rem;
+        }
+      }
+
        > .c-btn  {
         margin-top: 2rem;
+
+        @include mq($until: desktop) {
+          font-size: 1.4rem;
+          padding: .5rem 1rem;
+        }
        }
 
       &:only-child {
@@ -137,6 +161,10 @@ onMounted(async () => {
 
     &__media {
       flex: 1 1 38rem;
+
+      @include mq($until: desktop) {
+        flex: 1 1 auto;
+      }
 
       img {
         display: block;

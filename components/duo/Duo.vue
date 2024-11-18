@@ -20,8 +20,17 @@
     display: grid;
     grid-template-columns: 70% 30%;
 
+    @include mq($until: desktop) {
+        display: block;
+        margin-bottom: 9rem;
+    }
+
     &__main {
         padding-right: 10rem;
+
+        @include mq($until: desktop) {
+            padding-right: 0;
+        }
     }
 
     &--full {
@@ -33,6 +42,9 @@
     }
 
     &__side {
+        @include mq($until: desktop) {
+            margin-top: 5rem;
+        }
         > * {
             top: 2rem;
             position: sticky;

@@ -49,7 +49,12 @@ const emit = defineEmits(['click'])
     text-transform: uppercase;
     transition: $transition;
     cursor: pointer;
-    
+
+    @include mq($until: desktop) {
+        padding: 1rem 1.5rem;
+        font-size: 1.8rem;
+    }
+
     &:hover {
         color: $white;
         &::before {

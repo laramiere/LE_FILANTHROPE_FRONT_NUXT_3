@@ -79,6 +79,10 @@ const handleClick = (name: string) => {
     opacity: 1;
     transition: $transition;
 
+    @include mq($until: desktop) {
+        padding: .5rem 2rem;
+    }
+
     &.loading {
         z-index: 0;
         opacity: 0;
@@ -88,10 +92,19 @@ const handleClick = (name: string) => {
     ul {
         display: flex;
         overflow: hidden;
+
+        @include mq($until: desktop) {
+            overflow-x: auto;
+        }
+
         li {
             flex: 0 1 auto;
             &:not(:last-child) {
                 margin-right: 4rem;
+
+                @include mq($until: desktop) {
+                    margin-right: 1.5rem;
+                }
             }
         }
     }
@@ -106,6 +119,11 @@ const handleClick = (name: string) => {
         font-size: 3rem;
         white-space: nowrap;
         user-select: none;
+
+        @include mq($until: desktop) {
+            font-size: 1.4rem;
+            padding: 0;
+        }
 
         &:hover,
         &.actif {

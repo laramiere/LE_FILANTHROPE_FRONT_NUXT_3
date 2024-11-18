@@ -3,11 +3,11 @@
         <div>
             <VButton>
                 <Gift />
-                Cadeau
+                <span>Cadeau</span>
             </VButton>
             <VButton @click="handleClickOnLink('/reservation')">
                 <Calendar />
-                Reserver
+                <span>Reserver</span>
             </VButton>
         </div>
         <VButton @click="emit('clickOnOpenMenuBtn')">
@@ -34,8 +34,30 @@ const handleClickOnLink = (link: string) => {
     transform: translateX(-50%);
     transition: $transition;
 
+    @include mq($until: desktop) {
+        padding: 2rem!important;
+    }
+
     > div {
+        @include mq($until: desktop) {
+            display: flex;
+        }
         .c-btn {
+            @include mq($until: desktop) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 4rem;
+                height: 4rem;
+                svg {
+                    margin-right: 0;
+                }
+                >span {
+                    > span {
+                        display: none;
+                    }
+                }
+            }
             &:not(:last-child) {
                 margin-right: 1.5rem;
             }

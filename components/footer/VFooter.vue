@@ -86,11 +86,23 @@
     border-top-left-radius: $global-radius;
     border-top-right-radius: $global-radius;
 
+    @include mq($until: desktop) {
+        margin: 0 -2rem;
+        padding: 2rem;
+    }
+
+
     &__main {
         display: grid;
         grid-template-columns: repeat(3,1fr);
         border-top: .1rem solid $white;
         border-bottom: .1rem solid $white;
+
+        @include mq($until: desktop) {
+            display: flex;
+            flex-direction: column;
+            border-top: none;
+        }
     }
 
     &__info {
@@ -99,21 +111,40 @@
         justify-content: space-between;
         padding: 2rem 0;
 
+        @include mq($until: desktop) {
+            border-bottom: .1rem solid $white;
+        }
+
         > div {
             h3 {
                 font-size: 6rem;
                 text-transform: uppercase;
                 line-height: 1;
                 margin-bottom: 2rem;
+
+                @include mq($until: desktop) {
+                    font-size: 3rem;
+                    margin-bottom: 1.5rem;
+                }
             }
 
             a {
+                display: block;
                 text-decoration: none;
                 color: $white;
+
+                @include mq($until: desktop) {
+                    font-size: 2rem;
+                    line-height: 1;
+                }
             }
 
             &:not(:last-child) {
                 margin-bottom: 5rem;
+
+                @include mq($until: desktop) {
+                    margin-bottom: 3rem;
+                }
             }
         }
     }
@@ -122,6 +153,12 @@
 
         border-left: .1rem solid $white;
         border-right: .1rem solid $white;
+
+        @include mq($until: desktop) {
+            border-left: none;
+            border-right: none;
+            border-bottom: .1rem solid $white;
+        }
 
         ul {
             display: grid;
@@ -150,6 +187,11 @@
                     overflow: hidden;
                     transition: $transition;
 
+                    @include mq($until: desktop) {
+                        padding: 2rem 0;
+                        font-size: 3rem;
+                    }
+
                     &::before {
                         content: '';
                         position: absolute;
@@ -172,6 +214,11 @@
                         fill: currentColor;
                         width: 4rem;
                         height: 4rem;
+
+                        @include mq($until: desktop) {
+                            width: 3rem;
+                            height: 3rem;
+                        }
                     }
 
                     &:hover {
@@ -190,16 +237,30 @@
         display: flex;
         align-items: flex-end;
         padding: 2rem;
+
+        @include mq($until: desktop) {
+            padding: 0;
+            margin: 2rem 0;
+        }
+
         ul {
             li {
                 &:not(:last-child) {
                     margin-bottom: 2rem;
+
+                    @include mq($until: desktop) {
+                        margin-bottom: 1rem;
+                    }
                 }
             }
             a {
                 line-height: 1;
                 color: $white;
                 text-decoration: none;
+
+                @include mq($until: desktop) {
+                    font-size: 2rem;
+                }
             }
         }
     }
@@ -207,10 +268,15 @@
     &__bottom {
         color: $white;
         padding-top: 5rem;
-        
+
         svg {
             width: 100%;
             fill: currentColor;
+        }
+
+        @include mq($until: desktop) {
+            padding-top: 2rem;
+            border-top: solid .1rem $white;
         }
     }
 }

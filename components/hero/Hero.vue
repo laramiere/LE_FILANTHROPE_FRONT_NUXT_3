@@ -75,6 +75,11 @@ onMounted (() => {
     padding-bottom: 5rem;
     margin-bottom: 6rem;
 
+    @include mq($until: desktop) {
+        height: 100svh;
+        padding-bottom: 2rem;
+    }
+
     &--article,
     &--small {
         #{$c}__content {
@@ -88,6 +93,10 @@ onMounted (() => {
         #{$c}__content {
             h1 {
                 font-size: 8rem;
+
+                @include mq($until: desktop) {
+                    font-size: 3rem;
+                }
             }
         }
     }
@@ -96,12 +105,17 @@ onMounted (() => {
         #{$c}__content {
             h1 {
                 font-size: 6rem;
+
+                @include mq($until: desktop) {
+                    font-size: 3rem;
+                }
             }
         }
     }
 
     &__media {
         position: absolute;
+        z-index: 1;
         top: 50%;
         left: 50%;
         width: 66rem;
@@ -112,6 +126,12 @@ onMounted (() => {
         transition: $transition;
         opacity: 0;
 
+        @include mq($until: desktop) {
+            width: 80%;
+            padding-top: 100%;
+            height: auto;
+        }
+
         &.visible {
             opacity: 1;
         }
@@ -120,10 +140,20 @@ onMounted (() => {
             width: 100%;
             height: 100%;
             object-fit: cover;
+
+            @include mq($until: desktop) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 
     &__main {
+        position: relative;
+        z-index: 2;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
@@ -140,12 +170,21 @@ onMounted (() => {
             text-transform: uppercase;
             font-size: 13.5rem;
             line-height: 1;
+
+            @include mq($until: desktop) {
+                font-size: 3rem;
+            }
         }
 
         h2 {
             font-size: 2rem;
             font-weight: 300;
             padding-left: 1.1rem;
+
+            @include mq($until: desktop) {
+                font-size: 1.8rem;
+                padding-left: 0;
+            }
         }
     }
 
@@ -155,6 +194,10 @@ onMounted (() => {
             width: 100%;
             max-width: 20rem;
             height: auto;
+
+            @include mq($until: desktop) {
+                max-width: 7rem;
+            }
         }
     }
 }

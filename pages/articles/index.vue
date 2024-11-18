@@ -45,5 +45,9 @@ const { data, error } = await useAsyncData('articles', async () => {
 <style lang="scss" scoped>
 .article {
     margin-bottom: 11rem;
+
+    @include mq($until: desktop) {
+        margin-bottom: 9rem;
+    }
 }
 </style>

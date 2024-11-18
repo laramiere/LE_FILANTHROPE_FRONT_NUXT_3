@@ -46,6 +46,11 @@ const getNumber = computed(() => {
     transform: rotateX(-90deg);
     transform-origin: top center;
     border: .1rem solid $black;
+
+    @include mq($until: desktop) {
+        padding: 1.5rem;
+    }
+
     &::before {
         content: '';
         z-index: 1;
@@ -64,23 +69,47 @@ const getNumber = computed(() => {
         align-items: center;
         justify-content: space-between;
 
+        @include mq($until: desktop) {
+            display: block;
+        }
+
         svg {
             width: 8rem;
             height: 8rem;
             fill: currentColor;
+
+            @include mq($until: desktop) {
+                width: 3rem;
+                height: 3rem;
+            }
         }
     }
     &__main {
         display: flex;
         align-items: center;
+
+        @include mq($until: desktop) {
+            display: block;
+        }
     }
     &__number {
         font-size: 10rem;
         margin-right: 10rem;
+
+        @include mq($until: desktop) {
+            font-size: 1.4rem;
+            margin-right: 0;
+            margin-bottom: 1rem;
+
+        }
     }
     &__title {
         font-size: 4rem;
         text-align: left;
+
+        @include mq($until: desktop) {
+            font-size: 2rem;
+        }
     }
 
     &:hover {

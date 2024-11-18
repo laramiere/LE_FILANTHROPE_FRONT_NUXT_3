@@ -108,12 +108,26 @@ const boardStats = reactive<{
 .board {
     margin-bottom: 11rem;
 
+    @include mq($until: desktop) {
+        margin-bottom: 9rem;
+    }
+
     &__title {
         line-height: 1;
         margin-bottom: 5rem;
+
+        @include mq($until: desktop) {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
     }
     &__subtitle {
         margin-bottom: 5rem;
+
+        @include mq($until: desktop) {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+        }
     }
     &__top {
         .board-filter {
