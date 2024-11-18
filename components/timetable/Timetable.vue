@@ -73,21 +73,49 @@ const activeItem : null | TimetableItem = tiemTableItem ?? null
     grid-template-columns: 60% 40%;
     margin-bottom: 11rem;
 
+    @include mq($until: desktop) {
+        display: flex;
+        flex-direction: column-reverse;
+        margin: 0 -2rem;
+        margin-bottom: 9rem;
+        margin-top: 13rem;
+        padding: 0;
+        width: calc(100% + 4rem);
+    }
+
     &__main {
+        @include mq($until: desktop) {
+            padding: 2rem;
+        }
+
         > h2 {
             line-height: 1;
             margin: 0;
             margin-bottom: 5rem;
+
+            @include mq($until: desktop) {
+                margin-bottom: 2rem;
+            }
         }
 
         p {
             margin-bottom: 5rem;
+
+            @include mq($until: desktop) {
+                font-size: 1.4rem;
+                line-height: 1;
+                margin-bottom: 2rem;
+            }
         }
     }
 
     &__list {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+
+        @include mq($until: desktop) {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     &__item {
@@ -97,11 +125,20 @@ const activeItem : null | TimetableItem = tiemTableItem ?? null
 
         &:not(:last-child) {
             margin-bottom: 5rem;
+
+            @include mq($until: desktop) {
+                margin-bottom: 3rem;
+            }
         }
         h3 {
             line-height: 1;
             margin-bottom: 1.7rem;
             font-weight: 700;
+
+            @include mq($until: desktop) {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+            }
         }
         span {
             display: block;
@@ -112,6 +149,14 @@ const activeItem : null | TimetableItem = tiemTableItem ?? null
 
     &__side {
         margin-bottom: -10rem;
+
+        @include mq($until: desktop) {
+            position: relative;
+            top: -4rem;
+            margin-bottom: -4rem;
+            padding: 0 2rem;
+        }
+
         img {
             position: relative;
             display: block;
@@ -129,8 +174,19 @@ const activeItem : null | TimetableItem = tiemTableItem ?? null
         background-color: transparent;
         padding: 0;
 
+        .timetable__main {
+            @include mq($until: desktop) {
+                padding: 0;
+            }
+        }
+
         .timetable__side {
             margin-bottom: 2rem;
+
+            @include mq($until: desktop) {
+                padding: 0;
+                top: 0
+            }
         }
 
         .timetable__list {

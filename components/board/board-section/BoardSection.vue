@@ -33,10 +33,18 @@ const props = defineProps<{
 .board-section {
     padding-top: 5rem;
 
+    @include mq($until: desktop) {
+        padding-top: 2rem;
+    }
+
     &__list {
         li {
             padding: 2rem 0;
             border-bottom: .1rem solid $black;
+
+            @include mq($until: desktop) {
+                padding: 1rem 0;
+            }
 
             &.is-hidden {
                 display: none;
@@ -52,6 +60,11 @@ const props = defineProps<{
         font-size: 2rem;
         font-style: italic;
         margin-bottom: 2.5rem;
+
+        @include mq($until: desktop) {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
     }
 }
 </style>

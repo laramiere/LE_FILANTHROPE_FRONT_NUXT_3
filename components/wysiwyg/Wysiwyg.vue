@@ -9,8 +9,16 @@ const props = defineProps<{
 <style lang="scss" scoped>
 .wysiwyg {
     * {
+        @include mq($until: desktop) {
+            font-size: 1.4rem;
+        }
+
         &:not(:last-child) {
             margin-bottom: 3rem;
+
+            @include mq($until: desktop) {
+                margin-bottom: 1.5rem;
+            }
         }
     }
 }

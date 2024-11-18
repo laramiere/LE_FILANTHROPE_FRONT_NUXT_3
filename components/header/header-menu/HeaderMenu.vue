@@ -7,11 +7,11 @@
             <div>
                 <VButton>
                     <Facebook />
-                    Facebook
+                    <span>Facebook</span>
                 </VButton>
                 <VButton>
                     <Insta />
-                    Insta
+                    <span>Insta</span>
                 </VButton>
             </div>
             <VButton
@@ -87,6 +87,9 @@ const emit = defineEmits(['closeOnCloseMenuBtn'])
     padding: 5rem;
     transition: $transition;
 
+    @include mq($until: desktop) {
+        padding: 2rem;
+    }
     &--visible {
         top: 0;
     }
@@ -98,8 +101,40 @@ const emit = defineEmits(['closeOnCloseMenuBtn'])
         padding-bottom: 5rem;
         border-bottom: .1rem solid $black;
 
+        @include mq($until: desktop) {
+            padding: 0;
+            padding-bottom: 2rem;
+        }
+        > .c-btn {
+            @include mq($until: desktop) {
+                width: 4rem;
+                height: 4rem;
+            }
+        }
         > div {
+            @include mq($until: desktop) {
+                display: flex;
+            }
+
             .c-btn {
+
+                @include mq($until: desktop) {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 4rem;
+                    height: 4rem;
+
+                    > span {
+                        svg {
+                            margin-right: 0;
+                        }
+
+                        > span {
+                            display: none;
+                        }
+                    }
+                }
                 &:not(:last-child) {
                     margin-right: 1.5rem;
                 }
@@ -112,6 +147,12 @@ const emit = defineEmits(['closeOnCloseMenuBtn'])
         grid-template-columns: repeat(2, 1fr);
         height: calc(100vh - 21.1rem);
         border-bottom: .1rem solid $black;
+
+        @include mq($until: desktop) {
+            display: block;
+            height: auto;
+            padding: 2rem 0;
+        }
 
         > nav {
             display: flex;
@@ -126,6 +167,10 @@ const emit = defineEmits(['closeOnCloseMenuBtn'])
                     &:not(:last-child) {
                         a {
                             padding-bottom: 3rem;
+
+                            @include mq($until: desktop) {
+                                padding-bottom: 2rem;
+                            }
                         }
                     }
                 }
@@ -140,12 +185,20 @@ const emit = defineEmits(['closeOnCloseMenuBtn'])
                 font-weight: 700;
                 line-height: 1;
                 text-transform: uppercase;
+
+                @include mq($until: desktop) {
+                    font-size: 2.5rem;
+                }
             }
         }
     }
 
     &__media {
         position: relative;
+
+        @include mq($until: desktop) {
+            display: none;
+        }
 
         > div {
             position: absolute;

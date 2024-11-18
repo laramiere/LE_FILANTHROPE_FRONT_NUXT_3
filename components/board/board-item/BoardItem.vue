@@ -49,14 +49,24 @@ const props = defineProps<{item: CardItem}>()
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
+        
     }
     &__title {
         font-weight: $font-weight-normal;
+
+        @include mq($until: desktop) {
+            font-size: 2rem;
+        }
     }
     &__desc {
         font-size: 1.8rem;
         font-style: italic;
         font-weight: $font-weight-light;
+
+        @include mq($until: desktop) {
+            font-size: 1.4rem;
+            line-height: 1;
+        }
     }
 }
 </style>
