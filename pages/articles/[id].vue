@@ -11,30 +11,29 @@
                 }
             }"
         />
-        <article
-            class="article"
-            :class="{'article--full' : !article?.horaire_restaurant}"
-        >
-            <section class="article__main">
-                <Wysiwyg :content="article.content"/>
-            </section>
-            <section
-                class="article__side"
+        <Duo>
+            <Wysiwyg :content="article.content"/>
+            <template
                 v-if="article?.horaire_restaurant"
+                #side
             >
                 <Timetable
-                    :horaire_restaurant="article.horaire_restaurant"
-                    :__component="ComponentKeys.Timetable"
-                    :id="article.horaire_restaurant?.id || 0"
-                    small-display
+                        :horaire_restaurant="article.horaire_restaurant"
+                        :__component="ComponentKeys.Timetable"
+                        :id="article.horaire_restaurant?.id || 0"
+                        small-display
                 />
-            </section>
-        </article>
+            </template>
+        </Duo>
     </div>
 </template>
 <script lang="ts" setup>
 import type { ArticleItem } from '@/shared/interfaces'
 import { ComponentKeys } from '@/shared/interfaces'
+import {
+    populateHoraireRestaurant,
+    populateMedia
+} from '@/shared/populate/populateConfig'
 const { findOne } = useStrapi()
 const route = useRoute()
 const {data: article, error} = await useAsyncData<ArticleItem>('article', async () => {
@@ -45,27 +44,8 @@ const {data: article, error} = await useAsyncData<ArticleItem>('article', async 
             }
         },
         populate: {
-            media: {
-                fields: [
-                    'alternativeText',
-                    'url',
-                ]
-            },
-            horaire_restaurant: {
-                populate: {
-                  timetableItem: {
-                    populate: {
-                      picture: {
-                        populate: {
-                          file: {
-                            fields: ['url', 'alternativeText']
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+            ...populateMedia,
+            ...populateHoraireRestaurant
         }
     })
     return article.data[0] as ArticleItem

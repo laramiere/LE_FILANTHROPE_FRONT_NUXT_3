@@ -24,36 +24,16 @@
 <script lang="ts" setup>
 import { ComponentKeys } from '@/shared/interfaces'
 import type { CartInterface } from '@/shared/interfaces'
+import {
+    populateCarteRestaurant,
+    populateHero
+} from '@/shared/populate/populateConfig'
 const { find } = useStrapi()
 const { data, error } = await useAsyncData<CartInterface>('cartePage', async () => {
     const response = await find('la-carte', {
         populate: {
-            hero: {
-                populate: {
-                    picture: {
-                        populate: {
-                            file: {
-                                fields: ['url', 'alternativeText']
-                            }
-                        }
-                    }
-                }
-            },
-            carte_du_restaurant: {
-                populate: {
-                  sectionLvl1: {
-                    populate: {
-                      sectionLvl2: {
-                        populate: {
-                          sectionLvl3: {
-                            populate: '*'
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+            ...populateHero,
+            ...populateCarteRestaurant
         }
     })
     return response.data as CartInterface

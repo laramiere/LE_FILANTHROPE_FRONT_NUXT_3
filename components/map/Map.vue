@@ -62,7 +62,6 @@ onMounted(async () => {
 
   const generateMarker = () => {
     props.pois.forEach((item, key) => {
-      console.log('key', key)
       L.marker([item.lat, item.lng], {icon: generateDivIcon(item.pin, key === 0)}).on('click', (event) => {
         const latLng = [event.target._latlng.lat, event.target._latlng.lng]
         removeActivClassOnPin()

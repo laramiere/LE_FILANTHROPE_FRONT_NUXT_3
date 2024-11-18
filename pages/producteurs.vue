@@ -17,22 +17,15 @@
     </div>
 </template>
 <script lang="ts" setup>
+import {
+    populateHero
+} from '@/shared/populate/populateConfig'
 const { find } = useStrapi()
 const { data } = await useAsyncData('producteur', async () => {
     try {
         const response = await find('producteur', {
             populate: {
-                hero: {
-                    populate: {
-                        picture: {
-                            populate: {
-                                file: {
-                                fields: ['url', 'alternativeText']
-                                }
-                            }
-                        }
-                    }
-                },
+                ...populateHero,
                 pois: {
                     populate: '*'
                 }
