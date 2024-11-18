@@ -14,24 +14,14 @@
 </div>
 </template>
 <script lang="ts" setup>
+import { populateHero } from '@/shared/populate/populateConfig'
 const { find } = useStrapi()
-
 const { data, error } = await useAsyncData('articles', async () => {
 
     const [globalArticlesPageResult, articlesCollectionsResult] = await Promise.allSettled([
         find('article-single-type', {
             populate: {
-                hero: {
-                    populate: {
-                        picture: {
-                            populate: {
-                                file: {
-                                fields: ['url', 'alternativeText']
-                                }
-                            }
-                        }
-                    }
-                }
+                ...populateHero
             }
         }),
         find('articles', {
