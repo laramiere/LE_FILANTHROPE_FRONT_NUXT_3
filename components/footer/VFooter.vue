@@ -4,80 +4,74 @@
             <div class="footer__info">
                 <div>
                     <h3 class="fw-bold">Nous trouver</h3>
-                    <a href="#_">
-                        16 Avenue Auguste Blanqui <br/> 69100 VILLEURBANNE
+                    <a
+                        :href="global.data.Info.maplink"
+                        target="_blank"
+                    >
+                        {{ global.data.Info.street }} <br/> {{ global.data.Info.zipcode }} {{ global.data.Info.city }}
                     </a>
                 </div>
                 <div>
                     <h3 class="fw-bold">Telephone</h3>
-                    <a href="tel:0662428736">
-                        0662428736
+                    <a :href="`tel:${global.data.Info.phone}`">
+                        {{ global.data.Info.phone }}
                     </a>
                 </div>
             </div>
             <nav class="footer__social">
                 <ul>
-                    <li>
-                        <a href="#_">
-                            <Facebook />
-                            <span>
-                                Facebook
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#_">
-                            <Insta />
-                            <span>
-                                Insta
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#_">
-                            <Linkedin />
-                            <span>
-                                Linkedin
-                            </span>
-                        </a>
-                    </li>
+                    <template
+                        v-for="social in global.data.Social"
+                        :key="social.id"
+                    >
+                        <li
+                            v-if="social.visible"
+                        >
+                            <a
+                                :href="social.link"
+                            >
+                                <IconGenerator :name="social.picto" />
+                                <span>
+                                    {{ social.name }}
+                                </span>
+                            </a>
+                        </li>
+                    </template>
                 </ul>
             </nav>
             <nav class="footer__nav">
                 <ul>
-                    <li>
-                        <NuxtLink class="fs-3" to="/">
-                            Accueil
+                    <template
+                        v-for="navItem in global.data.Navigation"
+                        :key="navItem.id"
+                    >
+                    <li
+                        v-if="navItem.visible"
+                    >
+                        <NuxtLink
+                            class="fs-3"
+                            :to="navItem.link === 'accueil' ? '/' : navItem.link"
+                        >
+                                {{ navItem.name }}
                         </NuxtLink>
                     </li>
-                    <li>
-                        <NuxtLink class="fs-3" to="/">
-                            La carte
-                        </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink class="fs-3" to="/">
-                            Nos Producteurs
-                        </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink class="fs-3" to="/">
-                            Reserver
-                        </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink class="fs-3" to="/">
-                            Articles
-                        </NuxtLink>
-                    </li>
+                    </template>
                 </ul>
             </nav>
         </div>
         <div class="footer__bottom">
-           <Filanthrope />
+            <nuxtLink to="/">
+                <Filanthrope />
+            </nuxtLink>
         </div>
     </footer>
 </template>
+<script lang="ts" setup>
+import type { Ref } from 'vue'
+import type { Global } from '@/shared/interfaces'
+
+const global: Ref<Global> = useState('global')
+</script>
 <style lang="scss" scoped>
 .footer {
     background-color: $brown;
@@ -268,6 +262,10 @@
     &__bottom {
         color: $white;
         padding-top: 5rem;
+
+        a {
+            color: $white;
+        }
 
         svg {
             width: 100%;
