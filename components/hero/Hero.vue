@@ -16,7 +16,7 @@
         >
             <img
                 :src="`${config.public.apiBaseUrl}${props.picture.file.url}`"
-                :alt="props.picture.file.alternativeText"
+                :alt="props.picture.file.alternativeTex"
             />
         </div>
         <div class="hero__main">

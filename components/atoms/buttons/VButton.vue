@@ -1,14 +1,25 @@
 <template>
     <a
-        v-if="props.externalLink"
-        class="c-btn c-btn--link"
+        v-if="props.externalLink && props.link"
+        class="c-btn"
         :class="{ 'c-btn--rounded': props.rounded }"
+        :href="props.link"
         target="_blank"
     >
         <span>
             <slot />
         </span>
     </a>
+    <NuxtLink
+        v-else-if="props.internalLink && props.link"
+        :to="props.link"
+        class="c-btn"
+        :class="{'c-btn--rounded': props.rounded }"
+    >
+        <span>
+            <slot />
+        </span>
+    </NuxtLink>
     <button
         v-else
         class="c-btn"
@@ -25,11 +36,14 @@
 interface Props {
     rounded?: boolean;
     externalLink?: boolean;
+    internalLink?: boolean;
+    link?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     rounded: false,
-    externalLink: false
+    externalLink: false,
+    internalLink: false
 })
 const emit = defineEmits(['click'])
 
@@ -37,6 +51,8 @@ const emit = defineEmits(['click'])
 <style lang="scss">
 .c-btn {
     z-index: 1;
+    display: inline-block;
+    text-decoration: none;
     position: relative;
     padding: 1.5rem 2rem;
     color: $black;
@@ -68,8 +84,8 @@ const emit = defineEmits(['click'])
         position: absolute;
         top: 100%;
         left: 0;
-        width: 150%;
-        height: 150%;
+        width: 100%;
+        height: 100%;
         background-color: $black;
         transform-origin: left bottom;
         transition: $transition;
@@ -80,7 +96,7 @@ const emit = defineEmits(['click'])
         z-index: 2;
         display: flex;
         align-items: center;
-
+        line-height: 1;
         > svg {
             fill: currentColor;
             display: block;
@@ -88,11 +104,6 @@ const emit = defineEmits(['click'])
             height: auto;
             margin-right: .8rem;
         }
-    }
-
-    &--link {
-        display: inline-block;
-        text-decoration: none;
     }
 
     &--rounded {

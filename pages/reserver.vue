@@ -67,7 +67,6 @@ const { data } = await useAsyncData('reservation', async () => {
         console.log('error', error)
     }
 })
-console.log('data', data)
 </script>
 <style lang="scss" scoped>
 .duo {

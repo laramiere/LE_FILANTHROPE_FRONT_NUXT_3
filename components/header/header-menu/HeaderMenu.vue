@@ -3,16 +3,21 @@
         class="header-menu"
         :class="{ 'header-menu--visible': visible }"
     >
-        <div class="header-menu__top wrapper">
+        <div class="header-menu__top">
             <div>
-                <VButton>
-                    <Facebook />
-                    <span>Facebook</span>
-                </VButton>
-                <VButton>
-                    <Insta />
-                    <span>Insta</span>
-                </VButton>
+                <template
+                    v-for="socialItem in global.data.Social"
+                    :key="socialItem.id"
+                >
+                    <VButton
+                        v-if="socialItem.visible && socialItem.globalDisplay"
+                        externalLink
+                        :link="socialItem.link"
+                    >
+                        <IconGenerator :name="socialItem.name" />
+                        <span>{{ socialItem.name }}</span>
+                    </VButton>
+                </template>
             </div>
             <VButton
                 @click="emit('closeOnCloseMenuBtn')"
@@ -25,16 +30,16 @@
             <nav>
                 <ul>
                     <li
-                        v-for="(item, key) in props.items"
-                        :key="key"
+                        v-for="(navItem, key) in global.data.Navigation"
+                        :key="navItem.id"
                         @mouseover="handleMouseOverItemMenu(key)"
                         @mouseleave="itemActif = null"
                     >
                         <NuxtLink
-                            :to="item.link"
+                            :to="navItem.link === 'accueil' ? '/' : navItem.link"
                              @click="emit('closeOnCloseMenuBtn')"
                         >
-                            {{ item.label }}
+                            {{ navItem.name }}
                         </NuxtLink>
                     </li>
                 </ul>
@@ -47,8 +52,8 @@
                     }"
                 >
                     <img
-                        :src="itemActif.img"
-                        :alt="itemActif.alt"
+                        :src="`${config.public.apiBaseUrl}${itemActif.picture.url}`"
+                        :alt="itemActif.picture.alternativeText || itemActif.name"
                         loading="lazy"
                     />
                 </div>
@@ -58,20 +63,22 @@
 </template>
 <script lang="ts" setup>
 import type { Ref } from 'vue'
-import type { HeaderMenuItem } from '@/shared/interfaces/index'
+import type { Global, GlobalLink } from '@/shared/interfaces'
 import { useGenericAction } from '@/shared/composable/index'
+const config = useRuntimeConfig()
+const global: Ref<Global> = useState('global')
 
 const props = defineProps<{
     items: HeaderMenuItem[],
     visible: boolean
 }>()
 const { generateRandomNumber } = useGenericAction()
-const itemActif: Ref<HeaderMenuItem | null> = ref(null)
+const itemActif: Ref<GlobalLink | null> = ref(null)
 
 const imageRotation: Ref<number> = ref(0)
 
 const handleMouseOverItemMenu = (key: number) => {
-    itemActif.value = props.items[key]
+    itemActif.value = global.value.data.Navigation[key]
     imageRotation.value = generateRandomNumber()
 }
 const emit = defineEmits(['closeOnCloseMenuBtn'])

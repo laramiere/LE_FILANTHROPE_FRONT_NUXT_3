@@ -1,11 +1,20 @@
 <template>
     <nav class="header-nav wrapper">
         <div>
-            <VButton>
+            <VButton
+                v-if="global.data.Gift.visible"
+                :link="global.data.Gift.link"
+                externalLink
+            >
                 <Gift />
-                <span>Cadeau</span>
+                <span>
+                    {{ global.data.Gift.name }}
+                </span>
             </VButton>
-            <VButton @click="handleClickOnLink('/reservation')">
+            <VButton
+                link="/reserver"
+                internalLink
+            >
                 <Calendar />
                 <span>Reserver</span>
             </VButton>
@@ -16,8 +25,12 @@
     </nav>
 </template>
 <script lang="ts" setup>
+import type { Ref } from 'vue'
+import type { Global } from '@/shared/interfaces'
 const emit = defineEmits(['clickOnOpenMenuBtn'])
 const router = useRouter()
+const global: Ref<Global> = useState('global')
+
 const handleClickOnLink = (link: string) => {
     router.push(link)
 }
@@ -39,10 +52,11 @@ const handleClickOnLink = (link: string) => {
     }
 
     > div {
-        @include mq($until: desktop) {
-            display: flex;
-        }
+        display: flex;
+        align-items: center;
+
         .c-btn {
+            text-transform: capitalize;
             @include mq($until: desktop) {
                 display: flex;
                 align-items: center;
