@@ -172,7 +172,7 @@ onMounted (() => {
             line-height: 1;
 
             @include mq($until: desktop) {
-                font-size: 3rem;
+                font-size: 3.4rem;
             }
         }
 
@@ -196,7 +196,7 @@ onMounted (() => {
             height: auto;
 
             @include mq($until: desktop) {
-                max-width: 7rem;
+                max-width: 11rem;
             }
         }
     }
