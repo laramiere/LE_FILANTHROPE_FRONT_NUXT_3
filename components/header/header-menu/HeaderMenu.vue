@@ -36,7 +36,7 @@
                         @mouseleave="itemActif = null"
                     >
                         <NuxtLink
-                            :to="navItem.link === 'accueil' ? '/' : navItem.link"
+                            :to="navItem.link === 'accueil' ? '/' : `/${navItem.link}`"
                              @click="emit('closeOnCloseMenuBtn')"
                         >
                             {{ navItem.name }}

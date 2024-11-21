@@ -50,7 +50,7 @@
                     >
                         <NuxtLink
                             class="fs-3"
-                            :to="navItem.link === 'accueil' ? '/' : navItem.link"
+                            :to="navItem.link === 'accueil' ? '/' : `/${navItem.link}`"
                         >
                                 {{ navItem.name }}
                         </NuxtLink>
