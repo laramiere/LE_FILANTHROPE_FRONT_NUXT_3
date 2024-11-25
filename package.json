@@ -9,7 +9,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "sb": "storybook dev --port 6006",
-    "sbb": "storybook build"
+    "sbb": "storybook build",
+    "release": "standard-version"
   },
   "dependencies": {
     "@nuxtjs/storybook": "^8.2.0",
@@ -34,6 +35,7 @@
     "@types/node": "^18.17.5",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
-    "sass-embedded": "^1.78.0"
+    "sass-embedded": "^1.78.0",
+    "standard-version": "^9.5.0"
   }
 }
