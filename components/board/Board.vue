@@ -19,7 +19,7 @@
             />
             <BoardFilter
                 :filters="subCategory"
-                :mainFilter="false"
+                :main-filter="false"
                 :class="{ 'loading': boardStats.subActiveCategoryLoading }"
                 @click="changeSubCategory"
             />

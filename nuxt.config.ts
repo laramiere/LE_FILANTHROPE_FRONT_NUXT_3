@@ -48,8 +48,5 @@ export default defineNuxtConfig({
     },
   ],
 
-  modules: [
-    '@vueuse/nuxt',
-    '@nuxtjs/strapi'
-  ],
+  modules: ['@vueuse/nuxt', '@nuxtjs/strapi', '@nuxt/eslint'],
 })

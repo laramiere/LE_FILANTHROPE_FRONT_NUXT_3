@@ -4,12 +4,12 @@
         :class="{'hidden': scrollStatus.isUserScrollDown}"
     >
         <HeaderNav
-            @clickOnOpenMenuBtn="displayGeneralMenu = true"
+            @click-on-open-menu-btn="displayGeneralMenu = true"
         />
         <HeaderMenu
-            @closeOnCloseMenuBtn="displayGeneralMenu = false"
             :items="headerItems"
             :visible="displayGeneralMenu"
+            @close-on-close-menu-btn="displayGeneralMenu = false"
         />
     </header>
 </template>

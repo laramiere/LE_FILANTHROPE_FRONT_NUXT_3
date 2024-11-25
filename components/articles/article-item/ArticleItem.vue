@@ -1,9 +1,9 @@
 <template>
     <nuxt-link
+        ref="articleItemRef"
         class="article-item"
         :class="{ 'swing-animation': articleIsVisible }"
         :to="`/articles/${props.slug}`"
-        ref="articleItemRef"
     >
         <div>
             <div class="article-item__main">

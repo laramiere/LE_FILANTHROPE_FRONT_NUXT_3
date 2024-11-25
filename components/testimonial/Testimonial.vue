@@ -17,7 +17,7 @@
                         :src="`${config.public.apiBaseUrl}${item.picture.file.url}`"
                         :alt="item.picture.file.alternativeText"
                         loading="lazy"
-                    />
+                    >
                     <p>
                         {{ item.content }}
                     </p>
@@ -31,7 +31,7 @@
                     :src="`${config.public.apiBaseUrl}${props.pictures[0].file.url}`"
                     :alt="props.pictures[0].file.alternativeText"
                     loading="lazy"
-                />
+                >
             </div>
         </div>
     </section>

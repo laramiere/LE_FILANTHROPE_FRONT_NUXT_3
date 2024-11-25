@@ -17,7 +17,7 @@
             <img
                 :src="`${config.public.apiBaseUrl}${props.picture.file.url}`"
                 :alt="props.picture.file.alternativeTex"
-            />
+            >
         </div>
         <div class="hero__main">
             <div class="hero__content">
@@ -36,7 +36,7 @@
                 v-if="props.displayLogo"
                 class="hero__logo"
             >
-                <img  src="/poule_fil.png" alt="Logo filanthrope" />
+                <img  src="/poule_fil.png" alt="Logo filanthrope" >
             </div>
         </div>
     </section>

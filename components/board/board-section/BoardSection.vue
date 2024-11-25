@@ -12,8 +12,8 @@
         >
             <li
                 v-for="item in props.section.sectionLvl3"
-                :class="{'is-hidden': item.carte_items.length === 0}"
                 :key="`${item.id}-${item.title}`"
+                :class="{'is-hidden': item.carte_items.length === 0}"
             >
                 <BoardSectionItem
                     :section="item"

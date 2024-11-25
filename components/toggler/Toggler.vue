@@ -2,7 +2,5 @@
     <button>
         <slot name="button" />
     </button>
-    <template>
-        <slot />
-    </template>
+    <slot />
 </template>

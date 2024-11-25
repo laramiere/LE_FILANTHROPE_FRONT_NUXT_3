@@ -1,4 +1,4 @@
-import { ComponentKeys } from './componentKeys'
+import type { ComponentKeys } from './componentKeys'
 
 export type TimetableComponentName = ComponentKeys.Timetable
 export type BoardComponentName = ComponentKeys.Board

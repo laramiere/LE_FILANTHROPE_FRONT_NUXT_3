@@ -18,9 +18,9 @@
                 #side
             >
                 <Timetable
+                        :id="article.horaire_restaurant?.id || 0"
                         :horaire_restaurant="article.horaire_restaurant"
                         :__component="ComponentKeys.Timetable"
-                        :id="article.horaire_restaurant?.id || 0"
                         small-display
                 />
             </template>
@@ -36,7 +36,7 @@ import {
 } from '@/shared/populate/populateConfig'
 const { findOne } = useStrapi()
 const route = useRoute()
-const {data: article, error} = await useAsyncData<ArticleItem>('article', async () => {
+const {data: article} = await useAsyncData<ArticleItem>('article', async () => {
     const article = await findOne('articles', {
         filters: {
             slug: {

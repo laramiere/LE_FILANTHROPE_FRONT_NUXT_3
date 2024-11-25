@@ -20,7 +20,7 @@ export function useScroll (): UseScrollReturn {
     let timeoutId: number | null = null
     const delay = 50
 
-    function updateScroll (event: Event) {
+    function updateScroll () {
         if (timeoutId !== null) {
             clearTimeout(timeoutId)
         }
