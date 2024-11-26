@@ -6,11 +6,10 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: 'http://localhost:1337/',
-      stadiamapsApiKey: '37f5e78a-cd8d-4a6c-bc8c-8ae249e2eaf1'
-    }
+      apiBaseUrl: 'https://localhost:1337',
+      stadiamapsApiKey: '37f5e78a-cd8d-4a6c-bc8c-8ae249e2eaf1',
+    },
   },
-
   vite: {
     css: {
       preprocessorOptions: {
@@ -26,19 +25,22 @@ export default defineNuxtConfig({
       link: [
         {
           rel: 'preconnect',
-          href: 'https://fonts.googleapis.com'
+          href: 'https://fonts.googleapis.com',
         },
         {
           rel: 'preconnect',
           href: 'https://fonts.googleapis.com',
-          crossorigin: ""
+          crossorigin: '',
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,700;1,300&display=swap'
+          href: 'https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,700;1,300&display=swap',
         },
-      ]
-    }
+      ],
+      htmlAttrs: {
+        lang: 'fr',
+      },
+    },
   },
 
   components: [
@@ -48,5 +50,10 @@ export default defineNuxtConfig({
     },
   ],
 
-  modules: ['@vueuse/nuxt', '@nuxtjs/strapi', '@nuxt/eslint'],
+  modules: [
+    '@vueuse/nuxt',
+    '@nuxtjs/strapi',
+    '@nuxt/eslint',
+    '@nuxtjs/seo',
+  ],
 })

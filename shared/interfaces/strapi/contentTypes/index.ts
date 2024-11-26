@@ -1,2 +1,2 @@
-export * from './singleTypes';
-export * from './collectionTypes';
+export * from './collectionTypes'
+export * from './singleTypes'

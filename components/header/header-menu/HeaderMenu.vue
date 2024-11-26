@@ -1,87 +1,90 @@
-<template>
-    <div
-        class="header-menu"
-        :class="{ 'header-menu--visible': props.visible }"
-    >
-        <div class="header-menu__top">
-            <div>
-                <template
-                    v-for="socialItem in global.data.Social"
-                    :key="socialItem.id"
-                >
-                    <VButton
-                        v-if="socialItem.visible && socialItem.globalDisplay"
-                        external-link
-                        :link="socialItem.link"
-                    >
-                        <IconGenerator :name="socialItem.name" />
-                        <span>{{ socialItem.name }}</span>
-                    </VButton>
-                </template>
-            </div>
-            <VButton
-                rounded
-                @click="emit('closeOnCloseMenuBtn')"
-            >
-                <Cross />
-            </VButton>
-        </div>
-        <div class="header-menu__content wrapper">
-            <nav>
-                <ul>
-                    <li
-                        v-for="(navItem, key) in global.data.Navigation"
-                        :key="navItem.id"
-                        @mouseover="handleMouseOverItemMenu(key)"
-                        @mouseleave="itemActif = null"
-                    >
-                        <NuxtLink
-                            :to="navItem.link === 'accueil' ? '/' : `/${navItem.link}`"
-                             @click="emit('closeOnCloseMenuBtn')"
-                        >
-                            {{ navItem.name }}
-                        </NuxtLink>
-                    </li>
-                </ul>
-            </nav>
-            <div class="header-menu__media">
-                <div
-                    v-if="itemActif"
-                    :style="{
-                        '--image-rotation': `${imageRotation}deg`
-                    }"
-                >
-                    <img
-                        :src="`${config.public.apiBaseUrl}${itemActif.picture.url}`"
-                        :alt="itemActif.picture.alternativeText || itemActif.name"
-                        loading="lazy"
-                    >
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
 <script lang="ts" setup>
-import type { Ref } from 'vue'
 import type { Global, GlobalLink } from '@/shared/interfaces'
+import type { Ref } from 'vue'
 import { useGenericAction } from '@/shared/composable/index'
+
+const props = defineProps<{
+  visible: boolean
+}>()
+const emit = defineEmits(['closeOnCloseMenuBtn'])
 const config = useRuntimeConfig()
 const global: Ref<Global> = useState('global')
 
-const props = defineProps<{
-    visible: boolean
-}>()
 const { generateRandomNumber } = useGenericAction()
 const itemActif: Ref<GlobalLink | null> = ref(null)
 
 const imageRotation: Ref<number> = ref(0)
 
-const handleMouseOverItemMenu = (key: number) => {
-    itemActif.value = global.value.data.Navigation[key]
-    imageRotation.value = generateRandomNumber()
+function handleMouseOverItemMenu(key: number) {
+  itemActif.value = global.value.data.Navigation[key]
+  imageRotation.value = generateRandomNumber()
 }
-const emit = defineEmits(['closeOnCloseMenuBtn'])
 </script>
+
+<template>
+  <div
+    class="header-menu"
+    :class="{ 'header-menu--visible': props.visible }"
+  >
+    <div class="header-menu__top">
+      <div>
+        <template
+          v-for="socialItem in global.data.Social"
+          :key="socialItem.id"
+        >
+          <VButton
+            v-if="socialItem.visible && socialItem.globalDisplay"
+            external-link
+            :link="socialItem.link"
+          >
+            <IconGenerator :name="socialItem.name" />
+            <span>{{ socialItem.name }}</span>
+          </VButton>
+        </template>
+      </div>
+      <VButton
+        rounded
+        @click="emit('closeOnCloseMenuBtn')"
+      >
+        <Cross />
+      </VButton>
+    </div>
+    <div class="header-menu__content wrapper">
+      <nav>
+        <ul>
+          <li
+            v-for="(navItem, key) in global.data.Navigation"
+            :key="navItem.id"
+            @mouseover="handleMouseOverItemMenu(key)"
+            @mouseleave="itemActif = null"
+          >
+            <NuxtLink
+              :to="navItem.link === 'accueil' ? '/' : `/${navItem.link}`"
+              @click="emit('closeOnCloseMenuBtn')"
+            >
+              {{ navItem.name }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-menu__media">
+        <div
+          v-if="itemActif"
+          :style="{
+            '--image-rotation': `${imageRotation}deg`,
+          }"
+        >
+          <img
+            :src="`${config.public.apiBaseUrl}${itemActif.picture.url}`"
+            :alt="itemActif.picture.alternativeText || itemActif.name"
+            loading="lazy"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style lang="scss" scoped>
 .header-menu {
     position: fixed;

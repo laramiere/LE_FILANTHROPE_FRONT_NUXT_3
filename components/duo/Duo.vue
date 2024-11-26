@@ -1,19 +1,20 @@
 <template>
-    <section
-        class="duo"
-        :class="{'duo--full' : !$slots.side}"
+  <section
+    class="duo"
+    :class="{ 'duo--full': !$slots.side }"
+  >
+    <div class="duo__main">
+      <slot />
+    </div>
+    <div
+      v-if="$slots.side"
+      class="duo__side"
     >
-        <div class="duo__main">
-            <slot />
-        </div>
-        <div
-            v-if="$slots.side"
-            class="duo__side"
-        >
-            <slot name="side" />
-        </div>
-    </section>
+      <slot name="side" />
+    </div>
+  </section>
 </template>
+
 <style lang="scss" scoped>
 .duo {
     margin-bottom: 11rem;

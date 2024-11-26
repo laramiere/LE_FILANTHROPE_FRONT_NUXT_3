@@ -1,14 +1,16 @@
-<template>
-    <section
-        class="richtext"
-        v-html="props.content"
-    />
-</template>
 <script lang="ts" setup>
 const props = defineProps<{
-    content: string
+  content: string
 }>()
 </script>
+
+<template>
+  <section
+    class="richtext"
+    v-html="props.content"
+  />
+</template>
+
 <style lang="scss">
 .richtext {
     * {

@@ -1,68 +1,72 @@
-<template>
-<section
-    class="wrapper timetable"
-    :class="{'small': props.smallDisplay}"
->
-    <div class="timetable__main">
-        <h2
-            v-if="props.title"
-            class="fs-3"
-        >
-            {{ props.title }}
-        </h2>
-        <p v-if="props.subtitle">
-            {{ props.subtitle }}
-        </p>
-        <ul
-            v-if="props.horaire_restaurant && props.horaire_restaurant.timetableItem.length"
-            class="timetable__list"
-        >
-            <li
-                v-for="(item, key) in props.horaire_restaurant.timetableItem"
-                :key="`${item.id}`"
-                class="timetable__item"
-                :class="{ 'timetable__item--actif': key === goodIndex }"
-            >
-                <h3 class="fs-2">{{ item.title }}</h3>
-                <span>
-                    {{ item.timeSlot1 }}
-                </span>
-                <span v-if="item.timeSlot2">
-                    {{ item.timeSlot2 }}
-                </span>
-            </li>
-        </ul>
-    </div>
-    <div class="timetable__side">
-        <img
-            class="timetable__media"
-            :src="activeItem?.picture ? `${config.public.apiBaseUrl}${activeItem.picture.file.url}` : '/pictures/picture_8.jpg'"
-            :alt=" activeItem?.picture ? activeItem.picture.file.alternativeText : 'Manger'"
-            loading="lazy"
-        >
-    </div>
-</section>
-</template>
-
 <script lang="ts" setup>
 import type { TimetableComponent, TimetableItem } from '@/shared/interfaces'
+
 type KeyType = 0 | 1 | 2 | 3 | 4 | 5 | 6
 const props = defineProps<TimetableComponent>()
 const config = useRuntimeConfig()
 const dayIndex: KeyType = new Date().getDay() as KeyType
 const mapperDay: { [key in KeyType]: number } = {
-    0: 6,
-    1: 0,
-    2: 1,
-    3: 2,
-    4: 3,
-    5: 4,
-    6: 5
+  0: 6,
+  1: 0,
+  2: 1,
+  3: 2,
+  4: 3,
+  5: 4,
+  6: 5,
 }
 const goodIndex = mapperDay[dayIndex]
-const tiemTableItem : TimetableItem | undefined = props.horaire_restaurant?.timetableItem[goodIndex]
-const activeItem : null | TimetableItem = tiemTableItem ?? null
+const tiemTableItem: TimetableItem | undefined = props.horaire_restaurant?.timetableItem[goodIndex]
+const activeItem: null | TimetableItem = tiemTableItem ?? null
 </script>
+
+<template>
+  <section
+    class="wrapper timetable"
+    :class="{ small: props.smallDisplay }"
+  >
+    <div class="timetable__main">
+      <h2
+        v-if="props.title"
+        class="fs-3"
+      >
+        {{ props.title }}
+      </h2>
+      <p v-if="props.subtitle">
+        {{ props.subtitle }}
+      </p>
+      <ul
+        v-if="props.horaire_restaurant && props.horaire_restaurant.timetableItem.length"
+        class="timetable__list"
+      >
+        <li
+          v-for="(item, key) in props.horaire_restaurant.timetableItem"
+          :key="`${item.id}`"
+          class="timetable__item"
+          :class="{ 'timetable__item--actif': key === goodIndex }"
+        >
+          <h3 class="fs-2">
+            {{ item.title }}
+          </h3>
+          <span>
+            {{ item.timeSlot1 }}
+          </span>
+          <span v-if="item.timeSlot2">
+            {{ item.timeSlot2 }}
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="timetable__side">
+      <img
+        class="timetable__media"
+        :src="activeItem?.picture ? `${config.public.apiBaseUrl}${activeItem.picture.file.url}` : '/pictures/picture_8.jpg'"
+        :alt=" activeItem?.picture ? activeItem.picture.file.alternativeText : 'Manger'"
+        loading="lazy"
+      >
+    </div>
+  </section>
+</template>
+
 <style lang="scss" scoped>
 .timetable {
     $c: &;

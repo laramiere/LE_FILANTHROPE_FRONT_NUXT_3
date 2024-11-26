@@ -1,34 +1,36 @@
-<template>
-    <section class="board-section">
-        <h3
-            v-if="props.section.description"
-            class="board-section__info fw-normal"
-        >
-            {{ props.section.description }}
-        </h3>
-        <ul
-            v-if="section.sectionLvl3"
-            class="board-section__list"
-        >
-            <li
-                v-for="item in props.section.sectionLvl3"
-                :key="`${item.id}-${item.title}`"
-                :class="{'is-hidden': item.carte_items.length === 0}"
-            >
-                <BoardSectionItem
-                    :section="item"
-                />
-            </li>
-        </ul>
-    </section>
-</template>
 <script lang="ts" setup>
-import type { SectionLvl2 } from '@/shared/interfaces';
+import type { SectionLvl2 } from '@/shared/interfaces'
 
 const props = defineProps<{
-    section: SectionLvl2
+  section: SectionLvl2
 }>()
 </script>
+
+<template>
+  <section class="board-section">
+    <h3
+      v-if="props.section.description"
+      class="board-section__info fw-normal"
+    >
+      {{ props.section.description }}
+    </h3>
+    <ul
+      v-if="section.sectionLvl3"
+      class="board-section__list"
+    >
+      <li
+        v-for="item in props.section.sectionLvl3"
+        :key="`${item.id}-${item.title}`"
+        :class="{ 'is-hidden': item.carte_items.length === 0 }"
+      >
+        <BoardSectionItem
+          :section="item"
+        />
+      </li>
+    </ul>
+  </section>
+</template>
+
 <style lang="scss" scoped>
 .board-section {
     padding-top: 5rem;
