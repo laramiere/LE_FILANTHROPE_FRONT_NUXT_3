@@ -8,24 +8,26 @@ export type TestimonialComponentName = ComponentKeys.Testimonial
 export type ComponentName = TimetableComponentName | BoardComponentName | SoloComponentName | TestimonialComponentName
 
 export interface BaseComponent {
-    __component: ComponentName;
-    id: number;
+  __component: ComponentName
+  id: number
 }
 
 export interface Media {
-    id: number;
-    alternativeText?: string;
-    url: string;
-    name: string;
-    documentId: string;
-    provider: string;
+  id: number
+  alternativeText?: string
+  url: string
+  name: string
+  documentId: string
+  provider: string
+  width: number
+  height: number
 }
 export interface Picture {
-    id: string;
-    file: {
-        alternativeText: string;
-        url: string;
-        id?: number;
-        documentId?: string;
-    }
+  id: string
+  file: {
+    alternativeText: string
+    url: string
+    id?: number
+    documentId?: string
+  }
 }

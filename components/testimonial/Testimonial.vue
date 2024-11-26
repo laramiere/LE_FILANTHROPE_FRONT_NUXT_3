@@ -1,46 +1,49 @@
-<template>
-    <section
-        class="testimonial"
-        :class="{'testimonial--noMedia': props.pictures && props.pictures.length === 0}"
-    >
-        <h2 class="fs-3">
-            {{ props.title }}
-        </h2>
-        <div class="testimonial__main">
-            <ul class="testimonial__list">
-                <li
-                    v-for="item in props.avis_clients"
-                    :key="item.documentId"
-                    class="testimonial__item"
-                >
-                    <img
-                        :src="`${config.public.apiBaseUrl}${item.picture.file.url}`"
-                        :alt="item.picture.file.alternativeText"
-                        loading="lazy"
-                    >
-                    <p>
-                        {{ item.content }}
-                    </p>
-                </li>
-            </ul>
-            <div
-                v-if="props.pictures && props.pictures.length"
-                class="testimonial__media"
-            >
-                <img
-                    :src="`${config.public.apiBaseUrl}${props.pictures[0].file.url}`"
-                    :alt="props.pictures[0].file.alternativeText"
-                    loading="lazy"
-                >
-            </div>
-        </div>
-    </section>
-</template>
 <script lang="ts" setup>
 import type { TestimonialComponent } from '@/shared/interfaces'
-const config = useRuntimeConfig()
+
 const props = defineProps<TestimonialComponent>()
+const config = useRuntimeConfig()
 </script>
+
+<template>
+  <section
+    class="testimonial"
+    :class="{ 'testimonial--noMedia': props.pictures && props.pictures.length === 0 }"
+  >
+    <h2 class="fs-3">
+      {{ props.title }}
+    </h2>
+    <div class="testimonial__main">
+      <ul class="testimonial__list">
+        <li
+          v-for="item in props.avis_clients"
+          :key="item.documentId"
+          class="testimonial__item"
+        >
+          <img
+            :src="`${config.public.apiBaseUrl}${item.picture.file.url}`"
+            :alt="item.picture.file.alternativeText"
+            loading="lazy"
+          >
+          <p>
+            {{ item.content }}
+          </p>
+        </li>
+      </ul>
+      <div
+        v-if="props.pictures && props.pictures.length"
+        class="testimonial__media"
+      >
+        <img
+          :src="`${config.public.apiBaseUrl}${props.pictures[0].file.url}`"
+          :alt="props.pictures[0].file.alternativeText"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </section>
+</template>
+
 <style lang="scss" scoped>
 .testimonial {
     margin-bottom: 11rem;
@@ -48,7 +51,7 @@ const props = defineProps<TestimonialComponent>()
     @include mq($until: desktop) {
         margin-bottom: 9rem;
     }
-    
+
     > h2 {
         margin-bottom: 5rem;
         @include mq($until: desktop) {

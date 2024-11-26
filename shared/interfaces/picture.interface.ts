@@ -1,4 +1,4 @@
 export interface Picture {
-    url: string;
-    alt: string;
+  url: string
+  alt: string
 }

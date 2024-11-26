@@ -1,34 +1,37 @@
-<template>
-    <div
-        v-if="props.section.carte_items.length"
-        class="board-section-item"
-        :class="{ 'actif': actif }"
-    >
-        <button
-            class="board-section-item__btn fw-light"
-            @click="actif = !actif"
-        >
-            {{ props.section.title }}
-            <span>
-                <Cross />
-            </span>
-        </button>
-        <div class="board-section-item__content">
-            <BoardItem
-                v-for="(item, key) in props.section.carte_items"
-                :key="`${key}-${item.title}`"
-                :item
-            />
-        </div>
-    </div>
-</template>
 <script lang="ts" setup>
 import type { SectionLvl3 } from '@/shared/interfaces'
-const actif = ref(false)
+
 const props = defineProps<{
-    section: SectionLvl3
+  section: SectionLvl3
 }>()
+const actif = ref(false)
 </script>
+
+<template>
+  <div
+    v-if="props.section.carte_items.length"
+    class="board-section-item"
+    :class="{ actif }"
+  >
+    <button
+      class="board-section-item__btn fw-light"
+      @click="actif = !actif"
+    >
+      {{ props.section.title }}
+      <span>
+        <Cross />
+      </span>
+    </button>
+    <div class="board-section-item__content">
+      <BoardItem
+        v-for="(item, key) in props.section.carte_items"
+        :key="`${key}-${item.title}`"
+        :item
+      />
+    </div>
+  </div>
+</template>
+
 <style lang="scss" scoped>
 .board-section-item {
     &.actif {

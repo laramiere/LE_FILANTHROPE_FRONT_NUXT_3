@@ -1,74 +1,78 @@
-<template>
-    <nav
-        class="board-filter"
-        :class="{ 'board-filter--secondary': mainFilter === false }"
-        @mousedown="handleMouseDown"
-        @mouseup="handleMouseUp"
-        @mousemove="handleMouseMove"
-    >
-        <ul ref="filterList">
-            <li
-                v-for="filter in props.filters"
-                :key="filter"
-            >
-                <button
-                :class="{'actif': filterActif === filter}"
-                @click="handleClick(filter)"
-                >
-                    {{ filter }}
-                </button>
-            </li>
-        </ul>
-    </nav>
-</template>
 <script setup lang="ts">
 import type { Ref } from 'vue'
 import { defineEmits, watch } from 'vue'
 
 const props = withDefaults(defineProps<{
-    mainFilter?: boolean,
-    filters: string[]
+  mainFilter?: boolean
+  filters: string[]
 }>(), {
-    mainFilter: true
+  mainFilter: true,
 })
+const emit = defineEmits<{
+  (event: 'click', value: string): void
+}>()
+
 const filterList = ref<HTMLElement | null>(null)
 
 let isMouseDown = false
 let startX = 0
 let scrollLeft = 0
 
-const handleMouseDown = (event: MouseEvent) => {
-    isMouseDown = true
-    startX = event.pageX - (filterList.value?.offsetLeft || 0)
-    scrollLeft = filterList.value?.scrollLeft || 0
+function handleMouseDown(event: MouseEvent) {
+  isMouseDown = true
+  startX = event.pageX - (filterList.value?.offsetLeft || 0)
+  scrollLeft = filterList.value?.scrollLeft || 0
 }
-const handleMouseUp = () => {
-    isMouseDown = false
+function handleMouseUp() {
+  isMouseDown = false
 }
-const handleMouseMove = (event: MouseEvent) => {
-    if (!isMouseDown) return
-    event.preventDefault()
-    const x = event.pageX - (filterList.value?.offsetLeft || 0)
-    const walk = (x - startX) * 2
-    if (filterList.value) {
-        filterList.value.scrollLeft = scrollLeft - walk
-    }
+function handleMouseMove(event: MouseEvent) {
+  if (!isMouseDown)
+    return
+  event.preventDefault()
+  const x = event.pageX - (filterList.value?.offsetLeft || 0)
+  const walk = (x - startX) * 2
+  if (filterList.value) {
+    filterList.value.scrollLeft = scrollLeft - walk
+  }
 }
 const filterActif: Ref<string> = ref(props.filters[0])
 
 watch(() => props.filters, (newFilters) => {
-    filterActif.value = newFilters[0]
+  filterActif.value = newFilters[0]
 })
-const emit = defineEmits<{
-    (event: 'click', value: string) : void
-}>()
-const handleClick = (name: string) => {
-    if (filterActif.value !== name) {
-        filterActif.value = name
-        emit('click', name)
-    }
+function handleClick(name: string) {
+  if (filterActif.value !== name) {
+    filterActif.value = name
+    emit('click', name)
+  }
 }
 </script>
+
+<template>
+  <nav
+    class="board-filter"
+    :class="{ 'board-filter--secondary': mainFilter === false }"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
+    @mousemove="handleMouseMove"
+  >
+    <ul ref="filterList">
+      <li
+        v-for="filter in props.filters"
+        :key="filter"
+      >
+        <button
+          :class="{ actif: filterActif === filter }"
+          @click="handleClick(filter)"
+        >
+          {{ filter }}
+        </button>
+      </li>
+    </ul>
+  </nav>
+</template>
+
 <style lang="scss" scoped>
 .board-filter {
     position: relative;

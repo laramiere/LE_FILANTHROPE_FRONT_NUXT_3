@@ -1,53 +1,56 @@
-<template>
-    <a
-        v-if="props.externalLink && props.link"
-        class="c-btn"
-        :class="{ 'c-btn--rounded': props.rounded }"
-        :href="props.link"
-        target="_blank"
-    >
-        <span>
-            <slot />
-        </span>
-    </a>
-    <NuxtLink
-        v-else-if="props.internalLink && props.link"
-        :to="props.link"
-        class="c-btn"
-        :class="{'c-btn--rounded': props.rounded }"
-    >
-        <span>
-            <slot />
-        </span>
-    </NuxtLink>
-    <button
-        v-else
-        class="c-btn"
-        :class="{ 'c-btn--rounded': props.rounded }"
-        @click="emit('click')"
-    >
-        <span>
-            <slot />
-        </span>
-    </button>
-</template>
 <script setup lang="ts">
-
 interface Props {
-    rounded?: boolean;
-    externalLink?: boolean;
-    internalLink?: boolean;
-    link?: string;
+  rounded?: boolean
+  externalLink?: boolean
+  internalLink?: boolean
+  link?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    rounded: false,
-    externalLink: false,
-    internalLink: false
+  rounded: false,
+  externalLink: false,
+  internalLink: false,
 })
 const emit = defineEmits(['click'])
-
 </script>
+
+<template>
+  <a
+    v-if="props.externalLink && props.link"
+    class="c-btn"
+    :class="{ 'c-btn--rounded': props.rounded }"
+    :href="props.link"
+    target="_blank"
+    aria-label="props.link"
+  >
+    <span>
+      <slot />
+    </span>
+  </a>
+  <NuxtLink
+    v-else-if="props.internalLink && props.link"
+    :to="props.link"
+    class="c-btn"
+    :class="{ 'c-btn--rounded': props.rounded }"
+    aria-label="props.link"
+  >
+    <span>
+      <slot />
+    </span>
+  </NuxtLink>
+  <button
+    v-else
+    class="c-btn"
+    :class="{ 'c-btn--rounded': props.rounded }"
+    aria-label="Action button"
+    @click="emit('click')"
+  >
+    <span>
+      <slot />
+    </span>
+  </button>
+</template>
+
 <style lang="scss">
 .c-btn {
     z-index: 1;
@@ -113,7 +116,7 @@ const emit = defineEmits(['click'])
         width: 5.2rem;
         height: 5.2rem;
         padding: 0;
-        
+
         span {
             svg {
                 margin-right: 0;

@@ -1,36 +1,38 @@
-<template>
-    <nav class="header-nav wrapper">
-        <div>
-            <VButton
-                v-if="global.data.Gift.visible"
-                :link="global.data.Gift.link"
-                external-link
-            >
-                <Gift />
-                <span>
-                    {{ global.data.Gift.name }}
-                </span>
-            </VButton>
-            <VButton
-                link="/reserver"
-                internal-link
-            >
-                <Calendar />
-                <span>Reserver</span>
-            </VButton>
-        </div>
-        <VButton @click="emit('clickOnOpenMenuBtn')">
-            Menu
-        </VButton>
-    </nav>
-</template>
 <script lang="ts" setup>
-import type { Ref } from 'vue'
 import type { Global } from '@/shared/interfaces'
+import type { Ref } from 'vue'
+
 const emit = defineEmits(['clickOnOpenMenuBtn'])
 const global: Ref<Global> = useState('global')
-
 </script>
+
+<template>
+  <nav class="header-nav wrapper">
+    <div>
+      <VButton
+        v-if="global.data.Gift.visible"
+        :link="global.data.Gift.link"
+        external-link
+      >
+        <Gift />
+        <span>
+          {{ global.data.Gift.name }}
+        </span>
+      </VButton>
+      <VButton
+        link="/reserver"
+        internal-link
+      >
+        <Calendar />
+        <span>Reserver</span>
+      </VButton>
+    </div>
+    <VButton @click="emit('clickOnOpenMenuBtn')">
+      Menu
+    </VButton>
+  </nav>
+</template>
+
 <style lang="scss" scoped>
 .header-nav {
     position: fixed;

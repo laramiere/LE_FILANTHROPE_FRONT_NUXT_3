@@ -1,69 +1,72 @@
-<template>
-    <section
-        class="hero"
-        :class="{
-            'hero--small': small,
-            'hero--article': article
-        }"
-    >
-        <div
-            v-if="props.picture"
-            class="hero__media"
-            :class="{'visible': visible}"
-            :style="{
-                '--image-rotation':`${mediaRotation}deg`
-            }"
-        >
-            <img
-                :src="`${config.public.apiBaseUrl}${props.picture.file.url}`"
-                :alt="props.picture.file.alternativeTex"
-            >
-        </div>
-        <div class="hero__main">
-            <div class="hero__content">
-                <h1
-                    v-if="props.displayLogo"
-                    v-html="'le <br> filanthrope'"
-                />
-                <h1 v-else>
-                   {{ props.title }} 
-                </h1>
-                <h2 v-if="props.subtitle">
-                    {{ props.subtitle }}
-                </h2>
-            </div>
-            <div
-                v-if="props.displayLogo"
-                class="hero__logo"
-            >
-                <img  src="/poule_fil.png" alt="Logo filanthrope" >
-            </div>
-        </div>
-    </section>
-</template>
 <script lang="ts" setup>
 import type { Picture } from '@/shared/interfaces/index'
-import { useGenericAction } from '@/shared/composable';
-import { onMounted } from 'vue';
+import { useGenericAction } from '@/shared/composable'
+import { onMounted } from 'vue'
+
 const props = withDefaults(defineProps<{
-    title: string,
-    subtitle?: string,
-    displayLogo?: boolean,
-    picture?: Picture,
-    small?: boolean,
-    article?: boolean
+  title: string
+  subtitle?: string
+  displayLogo?: boolean
+  picture?: Picture
+  small?: boolean
+  article?: boolean
 }>(), {
-    displayLogo: false
+  displayLogo: false,
 })
 const { generateRandomNumber } = useGenericAction()
 const mediaRotation = ref<number>(0)
 const visible = ref(false)
 const config = useRuntimeConfig()
 onMounted (() => {
-    mediaRotation.value = generateRandomNumber()
-    visible.value = true
+  mediaRotation.value = generateRandomNumber()
+  visible.value = true
 })
 </script>
+
+<template>
+  <section
+    class="hero"
+    :class="{
+      'hero--small': small,
+      'hero--article': article,
+    }"
+  >
+    <div
+      v-if="props.picture"
+      class="hero__media"
+      :class="{ visible }"
+      :style="{
+        '--image-rotation': `${mediaRotation}deg`,
+      }"
+    >
+      <img
+        :src="`${config.public.apiBaseUrl}${props.picture.file.url}`"
+        :alt="props.picture.file.alternativeText"
+      >
+    </div>
+    <div class="hero__main">
+      <div class="hero__content">
+        <h1
+          v-if="props.displayLogo"
+          v-html="'le <br> filanthrope'"
+        />
+        <h1 v-else>
+          {{ props.title }}
+        </h1>
+        <h2 v-if="props.subtitle">
+          {{ props.subtitle }}
+        </h2>
+      </div>
+      <div
+        v-if="props.displayLogo"
+        class="hero__logo"
+      >
+        <img src="/poule_fil.png" alt="Logo filanthrope">
+      </div>
+    </div>
+  </section>
+</template>
+
 <style lang="scss" scoped>
 .hero {
     $c: &;

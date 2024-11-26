@@ -1,37 +1,39 @@
-<template>
-    <nuxt-link
-        ref="articleItemRef"
-        class="article-item"
-        :class="{ 'swing-animation': articleIsVisible }"
-        :to="`/articles/${props.slug}`"
-    >
-        <div>
-            <div class="article-item__main">
-                <span class="article-item__number fw-light">
-                    {{ getNumber }}
-                </span>
-                <h2 class="article-item__title fw-light">
-                    {{ props.title }}
-                </h2>
-            </div>
-            <Glasses/>
-        </div>
-    </nuxt-link>
-</template>
 <script lang="ts" setup>
 import { useElementVisibility } from '@vueuse/core'
 import { ref } from 'vue'
+
 const props = defineProps<{
-    title: string;
-    slug: string;
-    number: number;
+  title: string
+  slug: string
+  number: number
 }>()
 const articleItemRef = ref(null)
 const articleIsVisible = useElementVisibility(articleItemRef)
 const getNumber = computed(() => {
-    return props.number < 10 ? `0${props.number}` : props.number
+  return props.number < 10 ? `0${props.number}` : props.number
 })
 </script>
+
+<template>
+  <nuxt-link
+    ref="articleItemRef"
+    class="article-item"
+    :class="{ 'swing-animation': articleIsVisible }"
+    :to="`/articles/${props.slug}`"
+  >
+    <div>
+      <div class="article-item__main">
+        <span class="article-item__number fw-light">
+          {{ getNumber }}
+        </span>
+        <h2 class="article-item__title fw-light">
+          {{ props.title }}
+        </h2>
+      </div>
+      <Glasses />
+    </div>
+  </nuxt-link>
+</template>
 
 <style lang="scss" scoped>
 .article-item {
@@ -120,7 +122,6 @@ const getNumber = computed(() => {
             top: 0;
         }
     }
-
 
 }
 </style>

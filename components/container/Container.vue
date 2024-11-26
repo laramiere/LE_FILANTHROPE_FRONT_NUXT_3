@@ -1,18 +1,20 @@
-<template>
-    <section class="container">
-        <div class="container__main">
-            <slot />
-        </div>
-        <div
-            v-if="$slots.side"
-            class="container__side"
-        >
-            <slot name="side"/>
-        </div>
-    </section>
-</template>
 <script lang="ts" setup>
 </script>
+
+<template>
+  <section class="container">
+    <div class="container__main">
+      <slot />
+    </div>
+    <div
+      v-if="$slots.side"
+      class="container__side"
+    >
+      <slot name="side" />
+    </div>
+  </section>
+</template>
+
 <style lang="scss" scoped>
 .container {
     background-color: $white;
