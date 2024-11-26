@@ -7,8 +7,8 @@
             <slot />
         </div>
         <div
-            class="duo__side"
             v-if="$slots.side"
+            class="duo__side"
         >
             <slot name="side" />
         </div>

@@ -20,10 +20,7 @@ export interface GlobalSocialLink extends Omit<GlobalLink, 'picture'> {
     globalDisplay: boolean;
 }
 
-export interface GlobalGiftLink extends Omit<GlobalLink, 'picture'> {
-
-}
-
+export type GlobalGiftLink = Omit<GlobalLink, 'picture'>
 export interface Global {
     data: {
         Info: GlobalInfo;

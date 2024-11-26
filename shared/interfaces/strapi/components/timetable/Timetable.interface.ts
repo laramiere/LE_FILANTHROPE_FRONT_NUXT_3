@@ -1,5 +1,5 @@
 import type { BaseComponent, Picture } from '../components.interface'
-import { ComponentKeys } from '../componentKeys'
+import type { ComponentKeys } from '../componentKeys'
 
 export interface TimetableItem {
     id: number;

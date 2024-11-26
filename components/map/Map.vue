@@ -1,6 +1,6 @@
 <template>
     <div class="map">
-        <div class="map__main gr" id="map" />
+        <div id="map" class="map__main gr" />
         <div class="map__side">
             <div class="map__info gr">
               <h2>
@@ -8,7 +8,7 @@
               </h2>
               <Wysiwyg :content="activeItem.content"/>
               <VButton
-                externalLink
+                external-link
                 :href="activeItem.link"
               >
                 Voir la page
@@ -19,7 +19,7 @@
                 :src="`${config.public.apiBaseUrl}${activeItem.picture.url}`"
                 :alt="activeItem.picture.alternativeText || activeItem.title"
                 loading="lazy"
-              />
+              >
             </div>
         </div>
     </div>

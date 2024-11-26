@@ -11,15 +11,15 @@
             <Wysiwyg :content="data.content"/>
         </Container>
         <Duo>
-            <iframe src='https://bookings.zenchef.com/results?rid=354078&fullscreen=1' frameborder='0' scrolling='yes'></iframe>
+            <iframe src='https://bookings.zenchef.com/results?rid=354078&fullscreen=1' frameborder='0' scrolling='yes'/>
             <template
                 v-if="data && data.horaire_restaurant"
                 #side
             >
                 <Timetable
+                    :id="data.horaire_restaurant?.id || 0"
                     :horaire_restaurant="data.horaire_restaurant"
                     :__component="ComponentKeys.Timetable"
-                    :id="data.horaire_restaurant?.id || 0"
                     small-display
                 />
             </template>

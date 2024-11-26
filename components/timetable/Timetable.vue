@@ -18,10 +18,10 @@
             class="timetable__list"
         >
             <li
-                class="timetable__item"
-                :class="{ 'timetable__item--actif': key === goodIndex }"
                 v-for="(item, key) in props.horaire_restaurant.timetableItem"
                 :key="`${item.id}`"
+                class="timetable__item"
+                :class="{ 'timetable__item--actif': key === goodIndex }"
             >
                 <h3 class="fs-2">{{ item.title }}</h3>
                 <span>

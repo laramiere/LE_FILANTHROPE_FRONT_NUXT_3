@@ -8,7 +8,7 @@
                         :href="global.data.Info.maplink"
                         target="_blank"
                     >
-                        {{ global.data.Info.street }} <br/> {{ global.data.Info.zipcode }} {{ global.data.Info.city }}
+                        {{ global.data.Info.street }} <br> {{ global.data.Info.zipcode }} {{ global.data.Info.city }}
                     </a>
                 </div>
                 <div>
