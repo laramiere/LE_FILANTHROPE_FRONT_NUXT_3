@@ -18,9 +18,6 @@ const props = defineProps<{
       :slug="article.slug"
       :number="key + 1"
     />
-    <p>
-      fofo
-    </p>
   </div>
 </template>
 

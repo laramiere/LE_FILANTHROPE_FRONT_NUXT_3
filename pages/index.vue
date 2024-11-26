@@ -11,6 +11,7 @@ import {
   populateSeo,
 } from '@/shared/populate/populateConfig'
 
+const config = useRuntimeConfig()
 const { find } = useStrapi()
 
 const Timetable = resolveComponent('Timetable')
@@ -21,7 +22,7 @@ const Solo = resolveComponent('Solo')
 const homeData: Ref<HomeInterface | null> = ref(null)
 const errorFetchData = ref(null)
 
-const { data, error } = await useAsyncData('home', async () => {
+const { data, error } = await useAsyncData<HomeInterface>('home', async () => {
   const response = await find('home', {
     populate: {
       ...populateHero,
@@ -51,12 +52,14 @@ const { data, error } = await useAsyncData('home', async () => {
       },
     },
   })
-  return response.data
+  return response.data as HomeInterface
 })
 useSeoMeta({
   title: data.value?.seo.metaTitle,
   description: data.value?.seo.metaDescription,
   ogTitle: data.value?.seo.metaTitle,
+  ogDescription: data.value?.seo.metaDescription,
+  ogImage: data.value?.seo?.shareImage?.url ? `${config.public.apiBaseUrl}${data.value?.seo?.shareImage?.url}` : null,
 })
 
 function getComponent(name: ComponentName) {
