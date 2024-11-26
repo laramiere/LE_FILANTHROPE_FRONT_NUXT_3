@@ -55,10 +55,10 @@ const { data, error } = await useAsyncData<HomeInterface>('home', async () => {
   return response.data as HomeInterface
 })
 useSeoMeta({
-  title: data.value?.seo.metaTitle,
-  description: data.value?.seo.metaDescription,
-  ogTitle: data.value?.seo.metaTitle,
-  ogDescription: data.value?.seo.metaDescription,
+  title: data.value?.seo?.metaTitle,
+  description: data.value?.seo?.metaDescription,
+  ogTitle: data.value?.seo?.metaTitle,
+  ogDescription: data.value?.seo?.metaDescription,
   ogImage: data.value?.seo?.shareImage?.url ? `${config.public.apiBaseUrl}${data.value?.seo?.shareImage?.url}` : null,
 })
 

@@ -26,10 +26,10 @@ const { data: article } = await useAsyncData<ArticleItem>('article', async () =>
   return article.data[0] as ArticleItem
 })
 useSeoMeta({
-  title: article.value?.seo.metaTitle,
-  description: article.value?.seo.metaDescription,
-  ogTitle: article.value?.seo.metaTitle,
-  ogDescription: article.value?.seo.metaDescription,
+  title: article.value?.seo?.metaTitle,
+  description: article.value?.seo?.metaDescription,
+  ogTitle: article.value?.seo?.metaTitle,
+  ogDescription: article.value?.seo?.metaDescription,
   ogImage: article.value?.seo?.shareImage?.url ? `${config.public.apiBaseUrl}${article.value?.seo?.shareImage?.url}` : null,
 })
 </script>

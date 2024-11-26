@@ -24,9 +24,9 @@ const { data } = await useAsyncData('reservation', async () => {
   }
 })
 useSeoMeta({
-  title: data.value?.seo.metaTitle,
-  description: data.value?.seo.metaDescription,
-  ogTitle: data.value?.seo.metaTitle,
+  title: data.value?.seo?.metaTitle,
+  description: data.value?.seo?.metaDescription,
+  ogTitle: data.value?.seo?.metaTitle,
   ogImage: data.value?.seo?.shareImage?.url ? `${config.public.apiBaseUrl}${data.value?.seo?.shareImage?.url}` : null,
 })
 </script>

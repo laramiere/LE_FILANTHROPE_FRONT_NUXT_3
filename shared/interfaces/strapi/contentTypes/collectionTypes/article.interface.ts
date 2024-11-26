@@ -10,5 +10,5 @@ export interface ArticleItem {
   documentId: string
   slug: string
   horaire_restaurant: TimetableComponent
-  seo: SeoInterface
+  seo?: SeoInterface
 }

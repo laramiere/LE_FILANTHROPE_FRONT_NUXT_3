@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: 'http://localhost:1337',
+      apiBaseUrl: 'https://localhost:1337',
       stadiamapsApiKey: '37f5e78a-cd8d-4a6c-bc8c-8ae249e2eaf1',
     },
   },
