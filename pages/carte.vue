@@ -13,8 +13,8 @@
             <Wysiwyg :content="data.content" />
         </Container>
         <Board
-            :__component="ComponentKeys.Board"
             :id="456"
+            :__component="ComponentKeys.Board"
             :carte_du_restaurant="data.carte_du_restaurant"
             :display-subtitle="false"
             :display-title="false"
@@ -29,7 +29,7 @@ import {
     populateHero
 } from '@/shared/populate/populateConfig'
 const { find } = useStrapi()
-const { data, error } = await useAsyncData<CartInterface>('cartePage', async () => {
+const { data } = await useAsyncData<CartInterface>('cartePage', async () => {
     const response = await find('la-carte', {
         populate: {
             ...populateHero,

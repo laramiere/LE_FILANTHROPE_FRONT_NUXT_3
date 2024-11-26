@@ -2,9 +2,7 @@
     <section
         class="richtext"
         v-html="props.content"
-    >
-
-    </section>
+    />
 </template>
 <script lang="ts" setup>
 const props = defineProps<{

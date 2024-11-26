@@ -1,7 +1,7 @@
 <template>
     <div
         class="header-menu"
-        :class="{ 'header-menu--visible': visible }"
+        :class="{ 'header-menu--visible': props.visible }"
     >
         <div class="header-menu__top">
             <div>
@@ -11,7 +11,7 @@
                 >
                     <VButton
                         v-if="socialItem.visible && socialItem.globalDisplay"
-                        externalLink
+                        external-link
                         :link="socialItem.link"
                     >
                         <IconGenerator :name="socialItem.name" />
@@ -20,8 +20,8 @@
                 </template>
             </div>
             <VButton
-                @click="emit('closeOnCloseMenuBtn')"
                 rounded
+                @click="emit('closeOnCloseMenuBtn')"
             >
                 <Cross />
             </VButton>
@@ -55,7 +55,7 @@
                         :src="`${config.public.apiBaseUrl}${itemActif.picture.url}`"
                         :alt="itemActif.picture.alternativeText || itemActif.name"
                         loading="lazy"
-                    />
+                    >
                 </div>
             </div>
         </div>
@@ -69,7 +69,6 @@ const config = useRuntimeConfig()
 const global: Ref<Global> = useState('global')
 
 const props = defineProps<{
-    items: HeaderMenuItem[],
     visible: boolean
 }>()
 const { generateRandomNumber } = useGenericAction()

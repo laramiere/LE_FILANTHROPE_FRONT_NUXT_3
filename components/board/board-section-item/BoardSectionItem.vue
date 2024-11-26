@@ -1,8 +1,8 @@
 <template>
     <div
+        v-if="props.section.carte_items.length"
         class="board-section-item"
         :class="{ 'actif': actif }"
-        v-if="props.section.carte_items.length"
     >
         <button
             class="board-section-item__btn fw-light"
@@ -15,7 +15,8 @@
         </button>
         <div class="board-section-item__content">
             <BoardItem
-                v-for="item in props.section.carte_items"
+                v-for="(item, key) in props.section.carte_items"
+                :key="`${key}-${item.title}`"
                 :item
             />
         </div>

@@ -4,7 +4,7 @@
             <VButton
                 v-if="global.data.Gift.visible"
                 :link="global.data.Gift.link"
-                externalLink
+                external-link
             >
                 <Gift />
                 <span>
@@ -13,7 +13,7 @@
             </VButton>
             <VButton
                 link="/reserver"
-                internalLink
+                internal-link
             >
                 <Calendar />
                 <span>Reserver</span>
@@ -28,12 +28,8 @@
 import type { Ref } from 'vue'
 import type { Global } from '@/shared/interfaces'
 const emit = defineEmits(['clickOnOpenMenuBtn'])
-const router = useRouter()
 const global: Ref<Global> = useState('global')
 
-const handleClickOnLink = (link: string) => {
-    router.push(link)
-}
 </script>
 <style lang="scss" scoped>
 .header-nav {
