@@ -1,77 +1,83 @@
-<template>
-    <footer class="footer">
-        <div class="footer__main">
-            <div class="footer__info">
-                <div>
-                    <h3 class="fw-bold">Nous trouver</h3>
-                    <a
-                        :href="global.data.Info.maplink"
-                        target="_blank"
-                    >
-                        {{ global.data.Info.street }} <br> {{ global.data.Info.zipcode }} {{ global.data.Info.city }}
-                    </a>
-                </div>
-                <div>
-                    <h3 class="fw-bold">Telephone</h3>
-                    <a :href="`tel:${global.data.Info.phone}`">
-                        {{ global.data.Info.phone }}
-                    </a>
-                </div>
-            </div>
-            <nav class="footer__social">
-                <ul>
-                    <template
-                        v-for="social in global.data.Social"
-                        :key="social.id"
-                    >
-                        <li
-                            v-if="social.visible"
-                        >
-                            <a
-                                :href="social.link"
-                            >
-                                <IconGenerator :name="social.picto" />
-                                <span>
-                                    {{ social.name }}
-                                </span>
-                            </a>
-                        </li>
-                    </template>
-                </ul>
-            </nav>
-            <nav class="footer__nav">
-                <ul>
-                    <template
-                        v-for="navItem in global.data.Navigation"
-                        :key="navItem.id"
-                    >
-                    <li
-                        v-if="navItem.visible"
-                    >
-                        <NuxtLink
-                            class="fs-3"
-                            :to="navItem.link === 'accueil' ? '/' : `/${navItem.link}`"
-                        >
-                                {{ navItem.name }}
-                        </NuxtLink>
-                    </li>
-                    </template>
-                </ul>
-            </nav>
-        </div>
-        <div class="footer__bottom">
-            <nuxtLink to="/">
-                <Filanthrope />
-            </nuxtLink>
-        </div>
-    </footer>
-</template>
 <script lang="ts" setup>
-import type { Ref } from 'vue'
 import type { Global } from '@/shared/interfaces'
+import type { Ref } from 'vue'
 
 const global: Ref<Global> = useState('global')
 </script>
+
+<template>
+  <footer class="footer">
+    <div class="footer__main">
+      <div class="footer__info">
+        <div>
+          <h3 class="fw-bold">
+            Nous trouver
+          </h3>
+          <a
+            :href="global.data.Info.maplink"
+            target="_blank"
+          >
+            {{ global.data.Info.street }} <br> {{ global.data.Info.zipcode }} {{ global.data.Info.city }}
+          </a>
+        </div>
+        <div>
+          <h3 class="fw-bold">
+            Telephone
+          </h3>
+          <a :href="`tel:${global.data.Info.phone}`">
+            {{ global.data.Info.phone }}
+          </a>
+        </div>
+      </div>
+      <nav class="footer__social">
+        <ul>
+          <template
+            v-for="social in global.data.Social"
+            :key="social.id"
+          >
+            <li
+              v-if="social.visible"
+            >
+              <a
+                :href="social.link"
+              >
+                <IconGenerator :name="social.picto" />
+                <span>
+                  {{ social.name }}
+                </span>
+              </a>
+            </li>
+          </template>
+        </ul>
+      </nav>
+      <nav class="footer__nav">
+        <ul>
+          <template
+            v-for="navItem in global.data.Navigation"
+            :key="navItem.id"
+          >
+            <li
+              v-if="navItem.visible"
+            >
+              <NuxtLink
+                class="fs-3"
+                :to="navItem.link === 'accueil' ? '/' : `/${navItem.link}`"
+              >
+                {{ navItem.name }}
+              </NuxtLink>
+            </li>
+          </template>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer__bottom">
+      <nuxtLink to="/">
+        <Filanthrope />
+      </nuxtLink>
+    </div>
+  </footer>
+</template>
+
 <style lang="scss" scoped>
 .footer {
     background-color: $brown;
@@ -84,7 +90,6 @@ const global: Ref<Global> = useState('global')
         margin: 0 -2rem;
         padding: 2rem;
     }
-
 
     &__main {
         display: grid;

@@ -1,4 +1,4 @@
-import type { Media, Picture } from '../components.interface'
+import type { Media } from '../components.interface'
 
 export interface SeoInterface {
   id: number

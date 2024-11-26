@@ -20,7 +20,7 @@ const { data } = await useAsyncData('reservation', async () => {
     return response.data
   }
   catch (error) {
-    console.log('error', error)
+    throw new Error(`Failed to fetch data: ${error}`)
   }
 })
 useSeoMeta({

@@ -25,7 +25,7 @@ const { data } = await useAsyncData('producteur', async () => {
     }
   }
   catch (error) {
-    console.log('error', error)
+    throw new Error(`Failed to fetch data: ${error}`)
   }
 })
 useSeoMeta({
