@@ -1,35 +1,16 @@
-<template>
-  <div>
-    <Hero
-        v-if="homeData"
-        :title="homeData.hero.title"
-        :subtitle="homeData.hero.subtitle"
-        :display-logo="homeData.hero.displayLogoPhil"
-    />
-    <template v-if="homeData?.pageZone">
-      <template
-        v-for="component in homeData.pageZone"
-        :key="component.id"
-      >
-        <component
-          :is="getComponent(component.__component)"
-          v-bind="{...component}"
-        />
-      </template>
-    </template>
-  </div>
-</template>
 <script lang="ts" setup>
-import { ComponentKeys } from '@/shared/interfaces'
 import type { ComponentName, HomeInterface } from '@/shared/interfaces'
 import type { Ref } from 'vue'
+import { ComponentKeys } from '@/shared/interfaces'
 import {
-  populateCarteRestaurant,
-  populateHoraireRestaurant,
-  populateHero,
   populateAvisClients,
-  populatePictures
+  populateCarteRestaurant,
+  populateHero,
+  populateHoraireRestaurant,
+  populatePictures,
 } from '@/shared/populate/populateConfig'
+const siteConfig = useSiteConfig()
+console.log('siteConfig', siteConfig)
 const { find } = useStrapi()
 
 const Timetable = resolveComponent('Timetable')
@@ -48,47 +29,69 @@ const { data, error } = await useAsyncData('home', async () => {
         on: {
           [ComponentKeys.Timetable]: {
             populate: {
-              ...populateHoraireRestaurant
-            }
+              ...populateHoraireRestaurant,
+            },
           },
           [ComponentKeys.Board]: {
             populate: {
-              ...populateCarteRestaurant
-            }
+              ...populateCarteRestaurant,
+            },
           },
           [ComponentKeys.Solo]: {
-            populate: '*'
+            populate: '*',
           },
           [ComponentKeys.Testimonial]: {
             populate: {
               ...populateAvisClients,
-              ...populatePictures
-            }
-          }
-        }
-      }
-    }
+              ...populatePictures,
+            },
+          },
+        },
+      },
+    },
   })
   return response.data
 })
-const getComponent = (name: ComponentName) => {
+function getComponent(name: ComponentName) {
   switch (name) {
     case ComponentKeys.Timetable:
-      return Timetable;
+      return Timetable
     case ComponentKeys.Board:
-      return Board;
+      return Board
     case ComponentKeys.Testimonial:
-      return Testimonial;
+      return Testimonial
     case ComponentKeys.Solo:
-      return Solo;
+      return Solo
     default:
-      throw new Error(`Unsupported component type`);
+      throw new Error(`Unsupported component type`)
   }
 }
 if (error.value) {
   errorFetchData.value = error.value
-} else {
+}
+else {
   homeData.value = data.value
 }
 </script>
-  
+
+<template>
+  <div>
+    <Hero
+      v-if="homeData"
+      :title="homeData.hero.title"
+      :subtitle="homeData.hero.subtitle"
+      :display-logo="homeData.hero.displayLogoPhil"
+    />
+    <template v-if="homeData?.pageZone">
+      <template
+        v-for="component in homeData.pageZone"
+        :key="component.id"
+      >
+        <component
+          :is="getComponent(component.__component)"
+          v-bind="{ ...component }"
+        />
+      </template>
+    </template>
+  </div>
+</template>
