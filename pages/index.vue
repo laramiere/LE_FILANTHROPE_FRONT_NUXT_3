@@ -8,9 +8,9 @@ import {
   populateHero,
   populateHoraireRestaurant,
   populatePictures,
+  populateSeo,
 } from '@/shared/populate/populateConfig'
-const siteConfig = useSiteConfig()
-console.log('siteConfig', siteConfig)
+
 const { find } = useStrapi()
 
 const Timetable = resolveComponent('Timetable')
@@ -25,6 +25,7 @@ const { data, error } = await useAsyncData('home', async () => {
   const response = await find('home', {
     populate: {
       ...populateHero,
+      ...populateSeo,
       pageZone: {
         on: {
           [ComponentKeys.Timetable]: {
@@ -52,6 +53,12 @@ const { data, error } = await useAsyncData('home', async () => {
   })
   return response.data
 })
+useSeoMeta({
+  title: data.value?.seo.metaTitle,
+  description: data.value?.seo.metaDescription,
+  ogTitle: data.value?.seo.metaTitle,
+})
+
 function getComponent(name: ComponentName) {
   switch (name) {
     case ComponentKeys.Timetable:

@@ -1,101 +1,107 @@
 export const populateHero = {
-    hero: {
+  hero: {
+    populate: {
+      picture: {
         populate: {
-            picture: {
-                populate: {
-                    file: {
-                        fields: ['url', 'alternativeText']
-                    }
-                }
-            }
-        }
-    }
+          file: {
+            fields: ['url', 'alternativeText'],
+          },
+        },
+      },
+    },
+  },
 }
 
 export const populateHoraireRestaurant = {
-    horaire_restaurant: {
+  horaire_restaurant: {
+    populate: {
+      timetableItem: {
         populate: {
-            timetableItem: {
-                populate: {
-                    picture: {
-                        populate: {
-                            file: {
-                                fields: ['url', 'alternativeText']
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+          picture: {
+            populate: {
+              file: {
+                fields: ['url', 'alternativeText'],
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 }
 
 export const populateCarteRestaurant = {
-    carte_du_restaurant: {
+  carte_du_restaurant: {
+    populate: {
+      sectionLvl1: {
         populate: {
-          sectionLvl1: {
+          sectionLvl2: {
             populate: {
-              sectionLvl2: {
-                populate: {
-                  sectionLvl3: {
-                    populate: '*'
-                  }
-                }
-              }
-            }
-          }
-        }
-    }
+              sectionLvl3: {
+                populate: '*',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 }
 
 export const populateAvisClients = {
-    avis_clients: {
+  avis_clients: {
+    populate: {
+      fields: ['date', 'rate', 'userName', 'content'],
+      picture: {
         populate: {
-            fields: ['date', 'rate', 'userName', 'content'],
-            picture: {
-                populate: {
-                    file: {
-                        fields: ['url', 'alternativeText']
-                    }
-                }
-            }
-        }
-    }
+          file: {
+            fields: ['url', 'alternativeText'],
+          },
+        },
+      },
+    },
+  },
 }
 
 export const populatePictures = {
-    pictures: {
-        populate: {
-            file: {
-                fields: ['url', 'alternativeText']
-            }
-        }
-    }
+  pictures: {
+    populate: {
+      file: {
+        fields: ['url', 'alternativeText'],
+      },
+    },
+  },
 }
 
 export const populateMedia = {
-    media: {
-        fields: [
-            'alternativeText',
-            'url',
-        ]
-    }
+  media: {
+    fields: [
+      'alternativeText',
+      'url',
+    ],
+  },
+}
+
+export const populateSeo = {
+  seo: {
+    populate: '*',
+  },
 }
 interface populateConfigOptions {
-    hero? : boolean;
-    timetable?: boolean;
-    media?: boolean;
+  hero?: boolean
+  timetable?: boolean
+  media?: boolean
 }
-export const createPopulateConfig = (options: populateConfigOptions) => {
-    const config = {}
-    if(options.hero) {
-        config.hero = {...populateHero}
-    }
-    if (options.timetable) {
-        config.horaire_restaurant = populateHoraireRestaurant
-    }
-    if(options.media) {
-        config.media = populateMedia
-    }
-    return config
+export function createPopulateConfig(options: populateConfigOptions) {
+  const config = {}
+  if (options.hero) {
+    config.hero = { ...populateHero }
+  }
+  if (options.timetable) {
+    config.horaire_restaurant = populateHoraireRestaurant
+  }
+  if (options.media) {
+    config.media = populateMedia
+  }
+  return config
 }
