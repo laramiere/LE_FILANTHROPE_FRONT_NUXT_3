@@ -33,8 +33,40 @@ export default defineNuxtConfig({
           crossorigin: '',
         },
         {
+          rel: 'manifest',
+          href: '/favicon/site.webmanifest',
+        },
+        {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,700;1,300&display=swap',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/favicon/favicon-96x96.png',
+          sizes: '96x96',
+        },
+        {
+          rel: 'shortcut icon',
+          href: '/favicon/favicon.ico',
+          sizes: '96x96',
+        },
+        {
+          rel: 'apple-touch-icon',
+          type: 'image/png',
+          href: '/favicon/apple-touch-icon.png',
+          sizes: '180x180',
+        },
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          href: '/favicon/favicon.svg',
+        },
+      ],
+      meta: [
+        {
+          name: 'apple-mobile-web-app-title',
+          content: 'Le Filanthrope',
         },
       ],
       htmlAttrs: {
