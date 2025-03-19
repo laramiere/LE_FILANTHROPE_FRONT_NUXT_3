@@ -42,7 +42,8 @@ useSeoMeta({
       v-if="data && data.hero"
       :title="data.hero.title"
       :subtitle="data.hero.subtitle"
-      :picture="data.hero.picture"
+      :picture-background="data.hero.pictureBackground || null"
+      :picture="data.hero.picture || null"
       small
     />
     <Container>
