@@ -6,4 +6,5 @@ export interface Hero {
   title: string
   subtitle: string
   picture: Picture
+  pictureBackground: Picture
 }

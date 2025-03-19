@@ -5,7 +5,7 @@
   // Disable the default formatter
   "prettier.enable": false,
   "editor.formatOnSave": false,
-
+  "tailwind-fold.autoFold": false,
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
