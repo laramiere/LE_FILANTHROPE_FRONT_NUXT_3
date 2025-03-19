@@ -49,7 +49,7 @@ function handleMouseOverItemMenu(key: number) {
         <Cross />
       </VButton>
     </div>
-    <div class="header-menu__content wrapper">
+    <div class="header-menu__content">
       <nav>
         <ul>
           <li

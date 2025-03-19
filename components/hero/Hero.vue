@@ -7,11 +7,14 @@ const props = withDefaults(defineProps<{
   title: string
   subtitle?: string
   displayLogo?: boolean
-  picture?: Picture
+  picture?: Picture | null
+  pictureBackground?: Picture | null
   small?: boolean
   article?: boolean
 }>(), {
   displayLogo: false,
+  pictureBackground: null,
+  picture: null,
 })
 const { generateRandomNumber } = useGenericAction()
 const mediaRotation = ref<number>(0)
@@ -32,7 +35,16 @@ onMounted (() => {
     }"
   >
     <div
-      v-if="props.picture"
+      v-if="props.pictureBackground && props.pictureBackground.file"
+      class="hero__background"
+    >
+      <img
+        :src="`${config.public.apiBaseUrl}${props.pictureBackground?.file?.url}`"
+        :alt="props.pictureBackground.file?.alternativeText"
+      >
+    </div>
+    <div
+      v-if="props.picture && props.picture.file"
       class="hero__media"
       :class="{ visible }"
       :style="{
@@ -40,8 +52,8 @@ onMounted (() => {
       }"
     >
       <img
-        :src="`${config.public.apiBaseUrl}${props.picture.file.url}`"
-        :alt="props.picture.file.alternativeText"
+        :src="`${config.public.apiBaseUrl}${props.picture?.file?.url}`"
+        :alt="props.picture.file?.alternativeText"
       >
     </div>
     <div class="hero__main">
@@ -81,6 +93,36 @@ onMounted (() => {
     @include mq($until: desktop) {
         height: 100svh;
         padding-bottom: 2rem;
+    }
+
+    &__background {
+      position: absolute;
+      width: 140%;
+      height: 100vh;
+      top: 0;
+      left: -12.7%;
+      overflow: hidden;
+      opacity: 1;
+
+      &::after {
+        z-index: 2;
+        content:'';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(360deg, rgba(231,222,208,1) 20%, rgba(231,222,208,0) 100%);
+      }
+
+      > img {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
 
     &--article,

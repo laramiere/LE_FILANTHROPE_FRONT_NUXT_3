@@ -21,3 +21,10 @@
         }
     }
 }
+.leaflet-map-pane {
+  .leaflet-pane {
+    &:not(.leaflet-marker-pane) {
+      filter: grayscale(1);
+    }
+  }
+}

@@ -8,6 +8,13 @@ export const populateHero = {
           },
         },
       },
+      pictureBackground: {
+        populate: {
+          file: {
+            fields: ['url', 'alternativeText'],
+          },
+        },
+      },
     },
   },
 }

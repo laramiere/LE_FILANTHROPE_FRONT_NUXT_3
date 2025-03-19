@@ -91,6 +91,8 @@ else {
       :title="homeData.hero.title"
       :subtitle="homeData.hero.subtitle"
       :display-logo="homeData.hero.displayLogoPhil"
+      :picture-background="homeData.hero.pictureBackground || null"
+      :picture="homeData.hero.picture || null"
     />
     <template v-if="homeData?.pageZone">
       <template
