@@ -5,6 +5,7 @@ import {
   populateHoraireRestaurant,
   populateSeo,
 } from '@/shared/populate/populateConfig'
+import { transitionConfig } from '~/helpers/transitionConfig'
 
 const config = useRuntimeConfig()
 const { find } = useStrapi()
@@ -28,6 +29,9 @@ useSeoMeta({
   description: data.value?.seo?.metaDescription,
   ogTitle: data.value?.seo?.metaTitle,
   ogImage: data.value?.seo?.shareImage?.url ? `${config.public.apiBaseUrl}${data.value?.seo?.shareImage?.url}` : null,
+})
+definePageMeta({
+  pageTransition: transitionConfig,
 })
 </script>
 

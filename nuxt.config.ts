@@ -83,6 +83,7 @@ export default defineNuxtConfig({
   ],
 
   modules: [
+    '@pinia/nuxt',
     '@vueuse/nuxt',
     '@nuxtjs/strapi',
     '@nuxt/eslint',

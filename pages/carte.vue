@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { CartInterface } from '@/shared/interfaces'
+import { transitionConfig } from '@/helpers/transitionConfig'
 import { ComponentKeys } from '@/shared/interfaces'
 import {
   populateCarteRestaurant,
@@ -19,6 +20,7 @@ const { data } = await useAsyncData<CartInterface>('cartePage', async () => {
   })
   return response.data as CartInterface
 })
+
 useSeoMeta({
   title: data.value?.seo?.metaTitle,
   description: data.value?.seo?.metaDescription,
@@ -26,29 +28,35 @@ useSeoMeta({
   ogDescription: data.value?.seo?.metaDescription,
   ogImage: data.value?.seo?.shareImage?.url ? `${config.public.apiBaseUrl}${data.value?.seo?.shareImage?.url}` : null,
 })
+// definePageMeta({
+//   pageTransition: transitionConfig,
+// })
 </script>
 
 <template>
-  <div v-if="data">
-    <Hero
-      v-if="data && data.hero"
-      :title="data.hero.title"
-      :subtitle="data.hero.subtitle"
-      :picture-background="data.hero.pictureBackground || null"
-      :picture="data.hero.picture || null"
-      small
-    />
-    <Container
-      v-if="data.content"
-    >
-      <Wysiwyg :content="data.content" />
-    </Container>
-    <Board
-      :id="456"
-      :__component="ComponentKeys.Board"
-      :carte_du_restaurant="data.carte_du_restaurant"
-      :display-subtitle="false"
-      :display-title="false"
-    />
+  <div>
+    <div v-if="data">
+      <Hero
+        v-if="data && data.hero"
+        :title="data.hero.title"
+        :subtitle="data.hero.subtitle"
+        :picture-background="data.hero.pictureBackground || null"
+        :picture="data.hero.picture || null"
+        small
+      />
+      <Container
+        v-if="data.content"
+      >
+        <Wysiwyg :content="data.content" />
+      </Container>
+      <Board
+        :id="456"
+        :__component="ComponentKeys.Board"
+        :carte_du_restaurant="data.carte_du_restaurant"
+        :display-subtitle="false"
+        :display-title="false"
+      />
+    </div>
+    <PageTransition />
   </div>
 </template>

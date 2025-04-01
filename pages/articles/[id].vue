@@ -6,6 +6,7 @@ import {
   populateMedia,
   populateSeo,
 } from '@/shared/populate/populateConfig'
+import { transitionConfig } from '~/helpers/transitionConfig'
 
 const { findOne } = useStrapi()
 const route = useRoute()
@@ -31,6 +32,9 @@ useSeoMeta({
   ogTitle: article.value?.seo?.metaTitle,
   ogDescription: article.value?.seo?.metaDescription,
   ogImage: article.value?.seo?.shareImage?.url ? `${config.public.apiBaseUrl}${article.value?.seo?.shareImage?.url}` : null,
+})
+definePageMeta({
+  pageTransition: transitionConfig,
 })
 </script>
 

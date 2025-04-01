@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { ComponentName, HomeInterface } from '@/shared/interfaces'
 import type { Ref } from 'vue'
+import { useTransitionComposable } from '@/composables/useTransitionComposable'
+import { transitionConfig } from '@/helpers/transitionConfig'
 import { ComponentKeys } from '@/shared/interfaces'
 import {
   populateAvisClients,
@@ -21,7 +23,9 @@ const Solo = resolveComponent('Solo')
 
 const homeData: Ref<HomeInterface | null> = ref(null)
 const errorFetchData = ref(null)
-
+// definePageMeta({
+//   pageTransition: transitionConfig,
+// })
 const { data, error } = await useAsyncData<HomeInterface>('home', async () => {
   const response = await find('home', {
     populate: {
@@ -105,5 +109,6 @@ else {
         />
       </template>
     </template>
+    <PageTransition />
   </div>
 </template>
