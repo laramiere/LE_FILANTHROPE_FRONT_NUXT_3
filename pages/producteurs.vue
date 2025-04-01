@@ -3,6 +3,7 @@ import {
   populateHero,
   populateSeo,
 } from '@/shared/populate/populateConfig'
+import { transitionConfig } from '~/helpers/transitionConfig'
 
 const { find } = useStrapi()
 const config = useRuntimeConfig()
@@ -27,6 +28,9 @@ const { data } = await useAsyncData('producteur', async () => {
   catch (error) {
     throw new Error(`Failed to fetch data: ${error}`)
   }
+})
+definePageMeta({
+  pageTransition: transitionConfig,
 })
 useSeoMeta({
   title: data.value?.seo?.metaTitle,

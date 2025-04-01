@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 const global = useState('global')
 const { find } = useStrapi()
-
 await callOnce(async () => {
   if (!global.value) {
     global.value = await find('global', {
@@ -37,5 +36,6 @@ await callOnce(async () => {
     <VHeader />
     <slot />
     <VFooter />
+    <PageTransition />
   </div>
 </template>
